@@ -9,9 +9,17 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/static", express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
+
+  const listUser = [
+    "a" , 
+    "b" , 
+    "c"
+  ]
+
   res.render("index.pug", {
     title: "trang chu",
     message: "Chào bạn đến với Pug ",
+    listUser  :  listUser
   });
 });
 
