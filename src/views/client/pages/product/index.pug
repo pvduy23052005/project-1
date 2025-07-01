@@ -1,6 +1,18 @@
-extends ../../layout/default 
+extends ../../layout/default.pug
+include ../../mixins/box-head.pug
 
 block main 
+  .container.my-3
+    .row
+      .col-12
+        +box-head("Danh sách sản phẩm")
 
-
-h1  page product
+    .row
+      .col-4.mb-3
+        .product-item
+          .inner-image
+          .inner-content
+            h3.inner-title iPhone 9
+            .inner-price-new 80$
+            .inner-price-old 100$
+            .inner-discount -20%
