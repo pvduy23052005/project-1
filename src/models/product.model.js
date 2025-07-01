@@ -20,8 +20,7 @@ const productSchema = new mongoose.Schema(
       default: 0,
     },
     stock: {
-      type: Number,
-      default: 0,
+      type: Number
     },
     thumbnail: {
       type: String,
@@ -29,7 +28,6 @@ const productSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["active", "inactive"],
       default: "active",
     },
     position: {
@@ -45,6 +43,6 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-const Product = mongoose.model("Procut", productSchema, "products");
+const Product = mongoose.model("Product", productSchema , "products");
 
 module.exports = Product;
