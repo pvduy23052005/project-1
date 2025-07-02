@@ -14,7 +14,7 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "./views"));
 app.use("/", express.static(path.join(__dirname, "public")));
 
-app.locals.prefixAdmin = systemConfig.prefexAdmin;
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 database.connectDatabase(); // kết nối database
 
