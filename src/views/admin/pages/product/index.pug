@@ -1,5 +1,6 @@
 extends ../../layout/default.pug
 include ../../mixins/listButtonStatus.pug
+include ../../mixins/formSearch.pug
 
 block main 
   h1 Danh sach Sản phẩm
@@ -11,18 +12,7 @@ block main
         .col-6
           +listButtonStatus(listButtonStatus)
         .col-6 
-          form( id = "form-search" method="GET")
-            .input-group
-              input(
-                type="text",
-                class="form-control",
-                name="keyword",
-                placeholder="Tìm kiếm sản phẩm..."
-                value = keyword ? keyword : ''
-                ,
-              )
-              button(type="submit" class="btn btn-primary") Tìm kiếm
-
+          +formSearch(keyword)
 
   table.table.table-hover.table-sm
     thead

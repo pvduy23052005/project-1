@@ -1,0 +1,12 @@
+mixin formSearch(keyword)
+  form( id = "form-search" method="GET")
+    .input-group
+      input(
+        type="text",
+        class="form-control",
+        name="keyword",
+        placeholder="Tìm kiếm sản phẩm..."
+        value = keyword ? keyword : ''
+        ,
+      )
+      button(type="submit" class="btn btn-primary") Tìm kiếm
