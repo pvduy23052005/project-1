@@ -14,6 +14,18 @@ block main
                 class=`btn btn-sm ml-1 btn-outline-success ${button.class}`,
                 button-status=`${button.status}`,
               ) #{button.name}
+        .col-6 
+          form( id = "form-search" method="GET")
+            .input-group
+              input(
+                type="text",
+                class="form-control",
+                name="keyword",
+                placeholder="Tìm kiếm sản phẩm..."
+                value = keyword ? keyword : ''
+                ,
+              )
+              button(type="submit" class="btn btn-primary") Tìm kiếm
 
 
   table.table.table-hover.table-sm
