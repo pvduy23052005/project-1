@@ -1,4 +1,5 @@
 extends ../../layout/default.pug
+include ../../mixins/listButtonStatus.pug
 
 block main 
   h1 Danh sach Sản phẩm
@@ -8,12 +9,7 @@ block main
     .card-body
       .row
         .col-6
-          .box-listButtonStatus
-            each button in listButtonStatus
-              button(
-                class=`btn btn-sm ml-1 btn-outline-success ${button.class}`,
-                button-status=`${button.status}`,
-              ) #{button.name}
+          +listButtonStatus(listButtonStatus)
         .col-6 
           form( id = "form-search" method="GET")
             .input-group
