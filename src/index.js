@@ -5,7 +5,7 @@ const clientRoute = require("./routes/client/index.route");
 const adminRoute = require("./routes/admin/index.route");
 require("dotenv").config(); // load biến từ .env
 const database = require("./config/database");
-const systemConfig = require("./config/system.js");
+const systemConfig = require("./config/system");
 
 const port = process.env.PORT;
 const app = express();
