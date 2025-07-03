@@ -55,11 +55,22 @@ a{
   background-color: #F0F0F0;
 }
 
-.body .table-products{
+.body .main table{
+  background-color: aqua;
+  overflow: hidden;
   width: 100%;
-  border-radius:5px ;
-  -webkit-border-radius:5px ;
-  -moz-border-radius:5px ;
-  -ms-border-radius:5px ;
-  -o-border-radius:5px ;
+  border-radius:8px ;
+  -webkit-border-radius:8px ;
+  -moz-border-radius:8px ;
+  -ms-border-radius:8px ;
+  -o-border-radius:8px ;
+}
+
+.box-listButtonStatus{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex : wrap;
 }

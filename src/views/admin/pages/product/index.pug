@@ -1,9 +1,22 @@
 extends ../../layout/default.pug
 
 block main 
-  h1 Products
+  h1 Danh sach Sản phẩm
 
-  table.table.table-hover.table-sm.table-proructs
+  .card.mb-3.text-start
+    .card-header.mb-2 Bộ lọc và Tìm kiếm
+    .card-body
+      .row
+        .col-6
+          .box-listButtonStatus
+            each button in listButtonStatus
+              button(
+                class=`btn btn-sm ml-1 btn-outline-success ${button.class}`,
+                button-status=`${button.status}`,
+              ) #{button.name}
+
+
+  table.table.table-hover.table-sm
     thead
       tr
         th STT
