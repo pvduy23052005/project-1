@@ -1,0 +1,30 @@
+mixin pagination(pagination)
+  .box-pagination
+    nav(aria-label="Page navigation example")
+      ul.pagination
+        if pagination.currentPage > 1
+          li.page-item
+            button.page-link(href="#" aria-label="Previous"
+              button-page = pagination.currentPage - 1
+              )
+              span(aria-hidden="true") &laquo;
+
+        - for( var i = 1; i <=pagination.numberPage  ; i++)
+          if pagination.currentPage == i
+            li( class = "page-item")
+              button(
+                href="#" class = "page-link active"
+                button-page = i 
+              ) #{i}
+          else  
+            li( class = "page-item")
+              button(href="#" class = "page-link"
+              button-page = i
+              ) #{i}
+
+        if pagination.currentPage < pagination.numberPage 
+          li.page-item
+            button.page-link(href="#" aria-label="Next"
+              button-page = pagination.currentPage + 1
+              )
+              span(aria-hidden="true") &raquo;

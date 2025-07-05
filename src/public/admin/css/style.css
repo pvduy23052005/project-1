@@ -74,3 +74,10 @@ a{
   flex-direction: row;
   flex : wrap;
 }
+
+.box-pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
