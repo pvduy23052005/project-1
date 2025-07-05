@@ -48,7 +48,8 @@ if (btn) {
     item.addEventListener("click", (e) => {
       e.preventDefault();
       const pageClick = item.getAttribute("button-page");
-      console.log(pageClick);
+
+      
       if (pageClick) {
         url.searchParams.set("page", pageClick);
       } else {

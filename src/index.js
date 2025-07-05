@@ -6,6 +6,7 @@ const adminRoute = require("./routes/admin/index.route");
 require("dotenv").config(); // load biến từ .env
 const database = require("./config/database");
 const systemConfig = require("./config/system");
+const methodOverride = require('method-override');
 
 const port = process.env.PORT;
 const app = express();
@@ -13,6 +14,8 @@ const app = express();
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "./views"));
 app.use("/", express.static(path.join(__dirname, "public")));
+app.use(methodOverride('_method'));
+app.use(express.urlencoded({ extended: true }));
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
