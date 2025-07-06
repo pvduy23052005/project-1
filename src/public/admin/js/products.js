@@ -1,10 +1,10 @@
-const listBtn = document.querySelectorAll("[change-status]");
+const listButtonChangeStatus = document.querySelectorAll("[change-status]");
 
-if (listBtn.length > 0) {
+if (listButtonChangeStatus.length > 0) {
   const formChangeStatus = document.querySelector("#form-change-status");
   const path = formChangeStatus.getAttribute("data-path");
 
-  listBtn.forEach((item) => {
+  listButtonChangeStatus.forEach((item) => {
     item.addEventListener("click", (e) => {
       e.preventDefault();
       const changeStatus = item.getAttribute("change-status");
@@ -58,7 +58,14 @@ if (formChangeMulti) {
     // lay ra cac input da checked .
     const table = document.querySelector("[checkbox-all]");
     const inputChecked = table.querySelectorAll("input[name='id']:checked");
-    const inputSubmit = formChangeMulti.querySelector("input[name='listId']"); 
+    const inputSubmit = formChangeMulti.querySelector("input[name='listId']");
+
+    const typeChange = e.target[0].value ; 
+    
+    if(  typeChange === "delete" ) {
+      const isConfirm = confirm("Bạn có chắc chắn muốn xóa các sản phẩm này không?");
+      if (isConfirm === false) return;
+    }
 
     if (inputChecked.length > 0) {
       let listId = [];
@@ -66,12 +73,33 @@ if (formChangeMulti) {
         const id = item.getAttribute("value");
         listId.push(id);
       });
-      
+
       inputSubmit.value = listId.join("-");
 
       formChangeMulti.submit();
     }
   });
 }
-
 // end change-multi
+
+// delete product
+const listBtn = document.querySelectorAll("[button-delete]");
+if (listBtn.length > 0) {
+  listBtn.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.preventDefault();
+      const isConfirm = confirm(
+        "Bạn có chắc chắn muốn xóa sản phẩm này không?"
+      );
+
+      if (isConfirm) {
+        const id = item.getAttribute("data-id");
+        const formChangeStatus = document.querySelector("#form-delete");
+        const path = formChangeStatus.getAttribute("data-path");
+        let action = `${path}/${id}?_method=DELETE`;
+        formChangeStatus["action"] = action;
+        formChangeStatus.submit();
+      }
+    });
+  });
+}

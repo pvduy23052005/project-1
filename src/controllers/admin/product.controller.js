@@ -30,6 +30,7 @@ module.exports.index = async (req, res) => {
   );
 
   const products = await Product.find(find)
+    .sort( { position : "desc"})
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
 
@@ -71,10 +72,20 @@ module.exports.changeMulti = async (req, res) => {
       }
       break ;
     case "inactive":
-      await Product.updateMany({ _id: { $in: arrayId } }, { status: type });
+      try {
+        await Product.updateMany({ _id: { $in: arrayId } }, { status: type });
+      } catch (error) {
+        console.log("Lỗi:", error);
+        return res.status(500).send("Lỗi khi cập nhật trạng thái sản phẩm");
+      }
       break ;
     case "delete": 
-      await Product.deleteMany({ _id: { $in: arrayId } } , {deleted : true});
+      try {
+        await Product.updateMany({ _id: { $in: arrayId } }, { deleted: true });
+      } catch (error) {
+        console.log("Lỗi:", error);
+        return res.status(500).send("Lỗi khi xóa sản phẩm");
+      }
       break;
     default:
       break;
@@ -82,3 +93,18 @@ module.exports.changeMulti = async (req, res) => {
 
   res.redirect("/admin/products");
 };
+
+//[patch] admin/products/delete/:id
+module.exports.deleteProduct = async (req, res) => {
+  const id = req.params.id; 
+
+  try {
+    await Product.updateOne({ _id: id }, { deleted: true });
+    // await Product.deleteOne({ _id: id }); // Xóa vĩnh viễn
+  } catch (error) {
+    console.log("Lỗi:", error);
+    return res.status(500).send("Lỗi khi xóa sản phẩm");
+  }
+
+  res.redirect("/admin/products?page=1");
+}
