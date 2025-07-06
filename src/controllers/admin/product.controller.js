@@ -42,7 +42,7 @@ module.exports.index = async (req, res) => {
   });
 };
 
-//[get] admin/products/change-status/:status/:id
+//[patch] admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
   const newStatus = req.params.status;
   const id = req.params.id;
@@ -54,6 +54,31 @@ module.exports.changeStatus = async (req, res) => {
     console.log("Lỗi:", error);
     res.redirect("/admin/products");
   }
+};
 
-  
+//[patch] admin/products/change-multi
+module.exports.changeMulti = async (req, res) => {
+  const { type, listId } = req.body;
+
+  const arrayId = listId.split("-");
+
+  switch (type) {
+    case "active":
+      try {
+        await Product.updateMany({ _id: { $in: arrayId } }, { status: type });
+      } catch (error) {
+        
+      }
+      break ;
+    case "inactive":
+      await Product.updateMany({ _id: { $in: arrayId } }, { status: type });
+      break ;
+    case "delete": 
+      await Product.deleteMany({ _id: { $in: arrayId } } , {deleted : true});
+      break;
+    default:
+      break;
+  }
+
+  res.redirect("/admin/products");
 };
