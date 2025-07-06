@@ -50,6 +50,7 @@ module.exports.changeStatus = async (req, res) => {
 
   try {
     await Product.updateOne({ _id: id }, { status: newStatus });
+    req.flash("success", "Cập nhật trạng thái sản phẩm thành công");
     res.redirect("/admin/products?page=1");
   } catch (error) {
     console.log("Lỗi:", error);
@@ -67,6 +68,7 @@ module.exports.changeMulti = async (req, res) => {
     case "active":
       try {
         await Product.updateMany({ _id: { $in: arrayId } }, { status: type });
+        req.flash("success", "Cập nhật trạng thái sản phẩm thành công");
       } catch (error) {
         
       }
@@ -74,6 +76,7 @@ module.exports.changeMulti = async (req, res) => {
     case "inactive":
       try {
         await Product.updateMany({ _id: { $in: arrayId } }, { status: type });
+        req.flash("success", "Cập nhật trạng thái sản phẩm thành công");
       } catch (error) {
         console.log("Lỗi:", error);
         return res.status(500).send("Lỗi khi cập nhật trạng thái sản phẩm");
@@ -82,6 +85,7 @@ module.exports.changeMulti = async (req, res) => {
     case "delete": 
       try {
         await Product.updateMany({ _id: { $in: arrayId } }, { deleted: true });
+        req.flash("success", "Xóa sản phẩm thành công");
       } catch (error) {
         console.log("Lỗi:", error);
         return res.status(500).send("Lỗi khi xóa sản phẩm");
@@ -100,7 +104,7 @@ module.exports.deleteProduct = async (req, res) => {
 
   try {
     await Product.updateOne({ _id: id }, { deleted: true });
-    // await Product.deleteOne({ _id: id }); // Xóa vĩnh viễn
+    req.flash("success", "Xóa sản phẩm thành công");
   } catch (error) {
     console.log("Lỗi:", error);
     return res.status(500).send("Lỗi khi xóa sản phẩm");

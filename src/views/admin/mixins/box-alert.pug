@@ -1,0 +1,9 @@
+mixin box-alert(time)
+  if success && success.length > 0 
+    div(
+      class = "alert alert-success"
+      show-alert 
+      data-time = time
+      )
+        span  #{success}
+        i(class="fa-solid fa-delete-left" close-alert)

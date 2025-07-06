@@ -60,10 +60,11 @@ if (formChangeMulti) {
     const inputChecked = table.querySelectorAll("input[name='id']:checked");
     const inputSubmit = formChangeMulti.querySelector("input[name='listId']");
 
-    const typeChange = e.target[0].value ; 
-    
-    if(  typeChange === "delete" ) {
-      const isConfirm = confirm("Bạn có chắc chắn muốn xóa các sản phẩm này không?");
+    const typeChange = e.target[0].value;
+    if (typeChange === "delete") {
+      const isConfirm = confirm(
+        "Bạn có chắc chắn muốn xóa các sản phẩm này không?"
+      );
       if (isConfirm === false) return;
     }
 
@@ -103,3 +104,18 @@ if (listBtn.length > 0) {
     });
   });
 }
+// end delete product
+
+//show alert
+const showAlert = document.querySelector("[show-alert]");
+if (showAlert) {
+  const time = parseInt(showAlert.getAttribute("data-time"));
+  setTimeout(() => {
+    showAlert.classList.add("alert-hidden");
+  }, time);
+  const closeAlert = showAlert.querySelector("[close-alert]");
+  closeAlert.addEventListener("click", (e) => {
+    showAlert.classList.add("alert-hidden");
+  });
+}
+// end show alert

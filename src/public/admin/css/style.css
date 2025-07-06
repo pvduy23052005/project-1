@@ -1,83 +1,134 @@
-a{
-  color : #fff ;
-  font-size : 20px ; 
+a {
+  color: #fff;
+  font-size: 20px;
   text-decoration: none;
 }
 
-.header{
-  background-color: #D1E2FF ;
+.header {
+  background-color: #d1e2ff;
   padding: 10px 50px;
 }
 
-.header a{
-  color :  #fff  ; 
-  font-size : 30px ; 
+.header a {
+  color: #fff;
+  font-size: 30px;
   text-decoration: none;
 }
 
-.body{
+.body {
   display: flex;
   flex-direction: row;
 }
 
-.sider{
-  height: 100vh ; 
-  background-color: #00A6FF;
+.sider {
+  height: 100vh;
+  background-color: #00a6ff;
   border-right: 2px;
 }
 
-.sider .inner-menu{
+.sider .inner-menu {
   width: 100%;
 }
 
-.sider .inner-menu ul{
+.sider .inner-menu ul {
   display: flex;
   flex-direction: column;
   list-style: none;
   padding: 0;
-  margin: 0 ;
+  margin: 0;
 }
 
-.sider .inner-menu ul li{
+.sider .inner-menu ul li {
   padding: 20px 10px;
-  border-bottom: 1px solid #fff ;
-} 
+  border-bottom: 1px solid #fff;
+}
 
-
-.sider .inner-menu ul li:hover{
+.sider .inner-menu ul li:hover {
   background-color: #4274cb;
 }
 
-.body .main{
+.body .main {
   flex: 1;
   padding: 20px;
   text-align: center;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
-.body .main table{
+.body .main table {
   background-color: aqua;
   overflow: hidden;
   width: 100%;
-  border-radius:8px ;
-  -webkit-border-radius:8px ;
-  -moz-border-radius:8px ;
-  -ms-border-radius:8px ;
-  -o-border-radius:8px ;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 
-.box-listButtonStatus{
+.box-listButtonStatus {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   flex-direction: row;
-  flex : wrap;
+  flex: wrap;
 }
 
-.box-pagination{
+.box-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
+
+/* Show Alert */
+.body [show-alert]{
+  position: fixed; /* Giữ vị trí cố định trên màn hình */
+  top: 70px; /* Cách mép trên 70px */
+  right: 15px; /* Cách mép phải 15px */
+  z-index: 9999; /* Đảm bảo nó luôn nằm trên cùng */
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 1; /* Mặc định là hiện, sẽ dùng JS để thêm class ẩn */
+  transition: opacity 0.3s ease; /* Thêm transition cho opacity nếu muốn mờ dần */
+  background-color: #76e876;
+  border : 1px solid #00FF00; /* Đường viền màu xanh lá cây */
+  color : #f0f0f0 ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hiệu ứng ẩn */
+[show-alert].alert-hidden {
+  animation-name: alert-hidden; /* Tên animation đã định nghĩa */
+  animation-duration: 0.5s; /* Thời gian chạy animation là 0.5 giây */
+  animation-fill-mode: both; /* Giữ trạng thái cuối cùng của animation */
+}
+
+/* Định nghĩa keyframes cho hiệu ứng ẩn */
+@keyframes alert-hidden {
+  from {
+    right: 15px; /* Bắt đầu từ vị trí hiện tại (15px từ phải) */
+    opacity: 1; /* Mặc định là hiện */
+  }
+  to {
+    right: -100%; /* Dịch chuyển ra ngoài màn hình về phía bên phải */
+    opacity: 0; /* Mờ dần */
+    display: none; /* Cuối cùng ẩn hoàn toàn phần tử */
+  }
+}
+
+.body [show-alert] span{
+  font-weight: 600;
+}
+
+.body [show-alert] i{
+  margin-left: 10px; 
+  cursor: pointer; 
+  color: #f0f0f0; 
+  font-size : 20px ; 
+}
+
+/* End Show Alert */
