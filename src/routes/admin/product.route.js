@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const productController = require("../../controllers/admin/product.controller");
 const uploadCloud = require("../../middlewares/uploadCloud");
+const validateCreateProduct = require("../../validate/product.validate");
 
 router.get("/", productController.index);
 
@@ -15,6 +16,7 @@ router.get("/create", productController.createProductGet);
 
 router.post("/create",
   uploadCloud.single("thumbnail"),
+  validateCreateProduct.validateCreateProduct, 
   productController.createProductPost
 );
 

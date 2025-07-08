@@ -137,16 +137,13 @@ module.exports.createProductPost = async (req, res) => {
 
     if (req.file && req.file.path) {
       req.body.thumbnail = req.file.path;
-    } // Cloudinary trả về đường dẫn trực tiếp
+    }
 
     const product = new Product(req.body);
 
     await product.save();
 
     req.flash("success", "Thêm mới thành công");
-
     res.redirect("/admin/products");
-  } catch (error) {
-    res.redirect("/admin/products/create");
-  }
+  } catch (error) {}
 };

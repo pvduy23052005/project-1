@@ -92,9 +92,6 @@ a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   opacity: 1; /* Mặc định là hiện, sẽ dùng JS để thêm class ẩn */
   transition: opacity 0.3s ease; /* Thêm transition cho opacity nếu muốn mờ dần */
-  background-color: #76e876;
-  border : 1px solid #00FF00; /* Đường viền màu xanh lá cây */
-  color : #f0f0f0 ;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,7 +124,6 @@ a {
 .body [show-alert] i{
   margin-left: 10px; 
   cursor: pointer; 
-  color: #f0f0f0; 
   font-size : 20px ; 
 }
 

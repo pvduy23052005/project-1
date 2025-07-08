@@ -1,8 +1,11 @@
 extends ../../layout/default.pug
+include ../../mixins/box-alert.pug
 
 block main
 
   h1.mb-5 Tạo sản phẩm mới
+
+  +box-alert-warning(5000)
 
   .card.mb-5.text-start
     .card-header.mb-2 Thông tin sản phẩm
@@ -13,7 +16,7 @@ block main
       )
         .form-group.mb-3
           label(for="title") Tiêu đề sản phẩm
-          input(type="text", class = "form-control" name="title" id="title", required)
+          input(type="text", class = "form-control" name="title" id="title", required  )
 
         .form-group.mb-3
           label(for="description") Mô tả
@@ -23,7 +26,8 @@ block main
 
         .form-group.mb-3
           label(for="price") Giá sản phẩm
-          input(type="number", class = "form-control" name="price" id="price", required, min="0" step="0.01")
+          input(type="number", 
+            class = "form-control" name="price" id="price", required, min="0" step="0.01" )
 
         .form-group.mb-3
           label(for="discountPercentage") Giảm giá (%)
@@ -38,7 +42,7 @@ block main
           input(type="file",
             class = "form-control" name="thumbnail" id="thumbnail" accept="image/*")
           img(src="", id = "preview" alt="" style="max-width: 150px; margin-top: 10px;")
-          
+
         .form-group.mb-3
           label(for="status") Trạng thái
           select( class = "form-control" name="status" id="status")
