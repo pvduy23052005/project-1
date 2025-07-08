@@ -1,23 +1,21 @@
 mixin form-change-multi ()
-  .card.mb-4
-    .card-header
-      form(
-        action=`${prefixAdmin}/products/change-multi?_method=PATCH`,
-        method="POST",
-        id="form-change-multi"
-      )
-        .d-flex.align-items-start
-          .form-group
-            select(name="type" class="form-control")
-              option(value="active") Hoạt động
-              option(value="inactive") Dừng hoạt động
-              option(value="delete") Xóa tất cả 
+  form(
+    action=`${prefixAdmin}/products/change-multi?_method=PATCH`,
+    method="POST",
+    id="form-change-multi"
+  )
+    .d-flex.align-items-start
+      .form-group
+        select(name="type" class="form-control")
+          option(value="active") Hoạt động
+          option(value="inactive") Dừng hoạt động
+          option(value="delete") Xóa tất cả 
 
-          .form-group
-            input(
-              type="text",
-              name="listId",
-              value="",
-              class="form-control d-none"
-            )
-          button(type="submit" class="btn btn-primary") Áp dụng
+      .form-group
+        input(
+          type="text",
+          name="listId",
+          value="",
+          class="form-control d-none"
+        )
+      button(type="submit" class="btn btn-primary") Áp dụng

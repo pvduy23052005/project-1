@@ -119,3 +119,21 @@ if (showAlert) {
   });
 }
 // end show alert
+
+// preview image
+const thumbnailInput = document.querySelector("#thumbnail");
+if (thumbnailInput) {
+  thumbnailInput.addEventListener("change", (e) => {
+    const preview = document.querySelector("#preview");
+    const file = e.target.files[0];
+    if (file) {
+      if (file) {
+        const img = document.querySelector("#preview");
+        img.src = URL.createObjectURL(file);
+      }
+    } else {
+      img.src = "";
+    }
+  });
+}
+// end preview image

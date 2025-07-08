@@ -30,7 +30,7 @@ module.exports.index = async (req, res) => {
   );
 
   const products = await Product.find(find)
-    .sort( { position : "desc"})
+    .sort({ position: "desc" })
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
 
@@ -69,10 +69,8 @@ module.exports.changeMulti = async (req, res) => {
       try {
         await Product.updateMany({ _id: { $in: arrayId } }, { status: type });
         req.flash("success", "Cập nhật trạng thái sản phẩm thành công");
-      } catch (error) {
-        
-      }
-      break ;
+      } catch (error) {}
+      break;
     case "inactive":
       try {
         await Product.updateMany({ _id: { $in: arrayId } }, { status: type });
@@ -81,8 +79,8 @@ module.exports.changeMulti = async (req, res) => {
         console.log("Lỗi:", error);
         return res.status(500).send("Lỗi khi cập nhật trạng thái sản phẩm");
       }
-      break ;
-    case "delete": 
+      break;
+    case "delete":
       try {
         await Product.updateMany({ _id: { $in: arrayId } }, { deleted: true });
         req.flash("success", "Xóa sản phẩm thành công");
@@ -100,7 +98,7 @@ module.exports.changeMulti = async (req, res) => {
 
 //[patch] admin/products/delete/:id
 module.exports.deleteProduct = async (req, res) => {
-  const id = req.params.id; 
+  const id = req.params.id;
 
   try {
     await Product.updateOne({ _id: id }, { deleted: true });
@@ -111,4 +109,44 @@ module.exports.deleteProduct = async (req, res) => {
   }
 
   res.redirect("/admin/products?page=1");
-}
+};
+
+//[get] admin/products/create
+module.exports.createProductGet = (req, res) => {
+  res.render("admin/pages/product/create", {
+    title: "Thêm sản phẩm",
+  });
+};
+
+//[post] admin/products/create
+module.exports.createProductPost = async (req, res) => {
+  const find = {
+    deleted: false,
+  };
+
+  try {
+    req.body.price = parseInt(req.body.price);
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
+    req.body.stock = parseInt(req.body.stock);
+
+    if (req.body.position === "") {
+      req.body.position = await Product.countDocuments(find);
+    } else {
+      req.body.position = parseInt(req.body.position);
+    }
+
+    if (req.file && req.file.path) {
+      req.body.thumbnail = req.file.path;
+    } // Cloudinary trả về đường dẫn trực tiếp
+
+    const product = new Product(req.body);
+
+    await product.save();
+
+    req.flash("success", "Thêm mới thành công");
+
+    res.redirect("/admin/products");
+  } catch (error) {
+    res.redirect("/admin/products/create");
+  }
+};

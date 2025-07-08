@@ -9,7 +9,7 @@ const systemConfig = require("./config/system");
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const flash = require('express-flash'); // Import express-flash
+const flash = require('express-flash'); 
 
 const port = process.env.PORT;
 const app = express();
