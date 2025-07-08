@@ -144,6 +144,6 @@ module.exports.createProductPost = async (req, res) => {
     await product.save();
 
     req.flash("success", "Thêm mới thành công");
-    res.redirect("/admin/products");
+    res.redirect("/admin/products?page=1");
   } catch (error) {}
 };

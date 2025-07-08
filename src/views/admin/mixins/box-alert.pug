@@ -1,12 +1,12 @@
 mixin box-alert-success(time)
-  if messages.success && messages.success.length > 0 
-    div(
-      class = "alert alert-success"
-      show-alert 
-      data-time = time
-      )
-        span  #{success}
-        i(class="fa-solid fa-delete-left" close-alert)
+  - if(success.length > 0)
+      div(
+        class = "alert alert-success"
+        show-alert 
+        data-time = time
+        )
+          span  #{success}
+          i(class="fa-solid fa-delete-left" close-alert)
 
 mixin box-alert-error(time)
   if messages.error && messages.error.length > 0 
