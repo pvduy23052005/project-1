@@ -16,14 +16,11 @@ module.exports = (status) => {
   ];
 
   if (status) {
-    const index = listButtonStatus.findIndex(
-      (item) => item.status == status
-    );
+    const index = listButtonStatus.findIndex((item) => item.status == status);
     listButtonStatus[index]["class"] = "active";
   } else {
     listButtonStatus[0]["class"] = "active";
   }
 
-
-  return listButtonStatus ;
+  return listButtonStatus;
 };

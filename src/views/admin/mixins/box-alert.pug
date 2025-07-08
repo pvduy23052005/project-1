@@ -1,5 +1,5 @@
 mixin box-alert-success(time)
-  if success && success.length > 0 
+  if messages.success && messages.success.length > 0 
     div(
       class = "alert alert-success"
       show-alert 
@@ -9,7 +9,7 @@ mixin box-alert-success(time)
         i(class="fa-solid fa-delete-left" close-alert)
 
 mixin box-alert-error(time)
-  if error && error.length > 0 
+  if messages.error && messages.error.length > 0 
     div(
       class = "alert alert-danger"
       show-alert 
@@ -20,11 +20,11 @@ mixin box-alert-error(time)
 
 mixin box-alert-warning(time)
   - if(messages.warning ) 
-      div(
-        class="alert alert-warning" 
-        style = "color :#000"
-        show-alert 
-        data-time = time
-        )
-          span  #{messages.warning}
-          i(class="fa-solid fa-delete-left" close-alert)
+    div(
+      class="alert alert-warning" 
+      style = "color :#000"
+      show-alert 
+      data-time = time
+      )
+        span  #{messages.warning}
+        i(class="fa-solid fa-delete-left" close-alert)

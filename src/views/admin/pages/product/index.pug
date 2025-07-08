@@ -8,8 +8,6 @@ include ../../mixins/box-alert.pug
 block main 
   +box-alert-success(5000)
 
-
-
   h1 Danh sach Sản phẩm
 
   .card.mb-3.text-start
@@ -23,8 +21,11 @@ block main
 
   .card.mb-4
     .card-header
-      +form-change-multi()
-      a(href="/admin/products/create" class="btn btn-outline-success")  + Thêm mới
+      .row 
+        .col-6 
+          +form-change-multi()
+        .col-6 
+          a(href="/admin/products/create" class="btn btn-outline-success")  + Thêm mới
 
   table(
     class = "table table-hover table-sm"
