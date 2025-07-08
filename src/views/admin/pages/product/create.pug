@@ -2,7 +2,7 @@ extends ../../layout/default.pug
 
 block main
 
-  h1 Tạo sản phẩm mới
+  h1.mb-5 Tạo sản phẩm mới
 
   .card.mb-5.text-start
     .card-header.mb-2 Thông tin sản phẩm
@@ -17,7 +17,9 @@ block main
 
         .form-group.mb-3
           label(for="description") Mô tả
-          textarea(name="description", class = "form-control" id="description")
+          textarea(name="description", 
+            style = "height: 100px; witdh : 100%",
+            class = "form-control" id="description")
 
         .form-group.mb-3
           label(for="price") Giá sản phẩm
@@ -47,4 +49,4 @@ block main
           label(for="position") Vị trí hiển thị
           input(type="number", class = "form-control" name="position" id="position" min="0" placeholder="Tự động tăng" )
 
-        button.btn.btn-success(type="submit") Tạo sản phẩm
+        button.btn.btn-success.text-align-end(type="submit") Tạo sản phẩm
