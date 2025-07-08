@@ -14,10 +14,20 @@ router.delete("/delete/:id", productController.deleteProduct);
 
 router.get("/create", productController.createProductGet);
 
-router.post("/create",
+router.post(
+  "/create",
   uploadCloud.single("thumbnail"),
-  validateCreateProduct.validateCreateProduct, 
+  validateCreateProduct.validateCreateProduct,
   productController.createProductPost
+);
+
+router.get("/edit/:id", productController.editProductGet);
+
+router.patch(
+  "/edit/:id",
+  uploadCloud.single("thumbnail"),
+  validateCreateProduct.validateCreateProduct,
+  productController.editProductPatch
 );
 
 module.exports = router;

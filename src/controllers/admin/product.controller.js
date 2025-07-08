@@ -147,3 +147,42 @@ module.exports.createProductPost = async (req, res) => {
     res.redirect("/admin/products?page=1");
   } catch (error) {}
 };
+
+//[get] admin/products/edit/:
+module.exports.editProductGet = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const editProduct = await Product.findOne({ _id: id, deleted: false });
+
+    res.render("admin/pages/product/edit", {
+      title: "Chỉnh sửa sản phẩm",
+      product: editProduct,
+    });
+  } catch (error) {
+
+    req.flash("error", "Không tìm thấy sản phẩm");
+    res.redirect("/admin/products?page=1");
+  }
+};
+
+module.exports.editProductPatch = async (req, res) => {
+  try {
+
+    if (req.file) {
+      req.body.thumbnail = req.file.path;
+    }
+    req.body.price = parseInt(req.body.price);
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
+    req.body.stock = parseInt(req.body.stock);
+    req.body.position = parseInt(req.body.position);
+
+    await Product.updateOne({ _id: req.params.id }, req.body);
+
+    req.flash("success", "Cập nhật sản phẩm thành công");
+    res.redirect("/admin/products/edit/" + req.params.id);
+  } catch (error) {
+    req.flash("error", "Cập nhật sản phẩm thất bại");
+    res.redirect("/admin/products/edit/" + req.params.id);
+  }
+};
+
