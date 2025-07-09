@@ -1,4 +1,8 @@
 module.exports = (objectPagination, query, count) => {
+  
+  if (!parseInt(query.page)) {
+    query.page = objectPagination["currentPage"];
+  }
   objectPagination["currentPage"] = parseInt(query.page);
 
   if (parseInt(query.page) > 0) {

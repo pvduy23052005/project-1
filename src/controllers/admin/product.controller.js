@@ -51,10 +51,10 @@ module.exports.changeStatus = async (req, res) => {
   try {
     await Product.updateOne({ _id: id }, { status: newStatus });
     req.flash("success", "Cập nhật trạng thái sản phẩm thành công");
-    res.redirect("/admin/products?page=1");
+    res.redirect(`/admin/products?page=${req.query.page || 1}`);
   } catch (error) {
     console.log("Lỗi:", error);
-    res.redirect("/admin/products");
+    res.redirect("back");
   }
 };
 
@@ -96,7 +96,7 @@ module.exports.changeMulti = async (req, res) => {
   res.redirect("/admin/products");
 };
 
-//[patch] admin/products/delete/:id
+//[patch] admin/p    res.redirect(`/admin/products`);roducts/delete/:id
 module.exports.deleteProduct = async (req, res) => {
   const id = req.params.id;
 

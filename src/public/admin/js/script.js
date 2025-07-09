@@ -43,19 +43,22 @@ if (search) {
 // pagination
 const btn = document.querySelectorAll("[button-page]");
 if (btn) {
+  const url = new URL(window.location.href);
+  // Get the current page from the URL or default to 1
+  const currentPage = parseInt(url.searchParams.get("page")) || 1;
+
+
   btn.forEach((item) => {
-    const url = new URL(window.location.href);
     item.addEventListener("click", (e) => {
       e.preventDefault();
       const pageClick = item.getAttribute("button-page");
 
-      
       if (pageClick) {
         url.searchParams.set("page", pageClick);
       } else {
-        url.searchParams.delete("page");
+        url.searchParams.set("page", currentPage);
       }
-      window.location.href = url.href ;
+      window.location.href = url.href;
     });
   });
 }

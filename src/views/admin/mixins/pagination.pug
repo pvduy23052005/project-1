@@ -10,17 +10,17 @@ mixin pagination(pagination)
               span(aria-hidden="true") &laquo;
 
         - for( var i = 1; i <=pagination.numberPage  ; i++)
-          if pagination.currentPage == i
-            li( class = "page-item")
-              button(
-                href="#" class = "page-link active"
+            if pagination.currentPage == i
+              li( class = "page-item")
+                button(
+                  href="#" class = "page-link active"
+                  button-page = i
+                ) #{i}
+            else  
+              li( class = "page-item")
+                button(href="#" class = "page-link"
                 button-page = i
-              ) #{i}
-          else  
-            li( class = "page-item")
-              button(href="#" class = "page-link"
-              button-page = i
-              ) #{i}
+                ) #{i}
 
         if pagination.currentPage < pagination.numberPage 
           li.page-item

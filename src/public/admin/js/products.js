@@ -3,6 +3,7 @@ const listButtonChangeStatus = document.querySelectorAll("[change-status]");
 if (listButtonChangeStatus.length > 0) {
   const formChangeStatus = document.querySelector("#form-change-status");
   const path = formChangeStatus.getAttribute("data-path");
+  const CurrentPage = formChangeStatus.getAttribute("currentPage");
 
   listButtonChangeStatus.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -12,7 +13,7 @@ if (listButtonChangeStatus.length > 0) {
 
       let newStatus = status === "active" ? "inactive" : "active";
 
-      let action = `${path}/${newStatus}/${id}?_method=PATCH`;
+      let action = `${path}/${newStatus}/${id}?_method=PATCH&page=${CurrentPage}`;
 
       formChangeStatus["action"] = action;
 
