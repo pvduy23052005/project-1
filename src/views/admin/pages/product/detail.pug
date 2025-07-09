@@ -1,0 +1,60 @@
+extends ../../layout/default.pug
+
+block main
+  h1 Chi tiết Sản phẩm
+
+  .card.mb-3.text-start
+    .card-header.mb-2 Thông tin Sản phẩm
+    .card-body
+      .row
+        .col-md-6
+          p 
+            strong Tiêu đề: 
+            | #{product.title}
+        .col-md-6
+          p 
+            strong Giá: 
+            | #{product.price} $
+
+      .row
+        .col-md-6
+          p 
+            strong Mô tả: 
+            | #{product.description}
+        .col-md-6
+          p 
+            strong Giảm giá: 
+            | #{product.discountPercentage}%
+
+      .row
+        .col-md-6
+          p 
+            strong Số lượng kho: 
+            | #{product.stock}
+        .col-md-6
+          p 
+            strong Trạng thái: 
+            | #{product.status}
+
+      .row
+        .col-md-6
+          p 
+            strong Vị trí: 
+            | #{product.position}
+        .col-md-6
+          p 
+            strong Ngày cập nhật: 
+            | #{product.updatedAt.toLocaleString()}
+
+      .row
+        .col-md-6
+          p 
+            strong Ảnh đại diện:
+          if product.thumbnail
+            img(src=product.thumbnail, alt="thumbnail" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px;")
+          else
+            p Không có ảnh
+      .row.mt-3
+        .col-md-6   
+          a(href=`/admin/products/edit/${product._id}` class="btn btn-outline-primary") Sửa sản phẩm
+      

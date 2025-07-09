@@ -159,15 +159,14 @@ module.exports.editProductGet = async (req, res) => {
       product: editProduct,
     });
   } catch (error) {
-
     req.flash("error", "Không tìm thấy sản phẩm");
     res.redirect("/admin/products?page=1");
   }
 };
 
+//[Patch] admin/products/edit/:
 module.exports.editProductPatch = async (req, res) => {
   try {
-
     if (req.file) {
       req.body.thumbnail = req.file.path;
     }
@@ -186,3 +185,25 @@ module.exports.editProductPatch = async (req, res) => {
   }
 };
 
+//[get] admin/products/detail/:id
+module.exports.detailProductGet = async (req, res) => {
+  try {
+    const find = { 
+      deleted: false,
+      _id: req.params.id
+    }
+    const product = await Product.findOne(find);
+    if (!product) {
+      req.flash("error", "Không tìm thấy sản phẩm");
+      return res.redirect("/admin/products?page=1");
+    }
+    res.render("admin/pages/product/detail", {
+      title: "Chi tiết sản phẩm",
+      product: product,
+    });
+  } catch (error) {
+    console.log("Lỗi:", error);
+    req.flash("error", "Lỗi khi lấy thông tin sản phẩm");
+    res.redirect("/admin/products?page=1");
+  }
+};
