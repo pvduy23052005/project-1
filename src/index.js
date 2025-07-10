@@ -47,11 +47,6 @@ database.connectDatabase(); // kết nối database
 clientRoute(app);
 adminRoute(app);
 
-if (process.env.NODE_ENV !== "production") {
-  app.listen(port, () => {
-    console.log(`Local server is running on http://localhost:${port}`);
-  });
-}
-
-module.exports = app;
-module.exports.handler = serverless(app);
+app.listen(port, () => {
+  console.log(`Local server is running on http://localhost:${port}`);
+});
