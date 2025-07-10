@@ -27,6 +27,7 @@
     "multer": "^2.0.1",
     "multer-storage-cloudinary": "^4.0.0",
     "pug": "^3.0.3",
+    "serverless-http": "^3.2.0",
     "toastr": "^2.1.4"
   },
   "devDependencies": {

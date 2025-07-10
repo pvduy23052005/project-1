@@ -10,6 +10,7 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('express-flash'); 
+const serverless = require('serverless-http');
 
 const port = process.env.PORT;
 const app = express();
@@ -47,3 +48,5 @@ adminRoute(app);
 app.listen(port, () => {
   console.log(`Example listener on port ${port} `);
 });
+
+module.exports.handler = serverless(app);
