@@ -82,6 +82,7 @@ a {
 }
 
 /* Show Alert */
+
 .body [show-alert]{
   position: fixed; /* Giữ vị trí cố định trên màn hình */
   top: 70px; /* Cách mép trên 70px */
@@ -97,7 +98,6 @@ a {
   justify-content: center;
 }
 
-/* Hiệu ứng ẩn */
 [show-alert].alert-hidden {
   animation-name: alert-hidden; /* Tên animation đã định nghĩa */
   animation-duration: 0.5s; /* Thời gian chạy animation là 0.5 giây */
@@ -126,5 +126,4 @@ a {
   cursor: pointer; 
   font-size : 20px ; 
 }
-
 /* End Show Alert */

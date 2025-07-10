@@ -23,3 +23,29 @@ module.exports.index = async (req, res) => {
     products: products1,
   });
 };
+
+module.exports.detail = async (req, res) => {
+  const slug = req.params.slug ; 
+
+  try{
+    const find = { 
+      status : "active" , 
+      slug : slug 
+    }
+
+    const product = await Product.findOne(find);
+
+    if(!product){
+      req.flash("warning","Không có sản phẩm") ;
+      res.redirect("/products");
+      return ; 
+    }
+
+    res.render("client/pages/product/detail.pug" , {
+      title : "Chi tiết sản phẩm" , 
+      product : product
+    })
+  }catch{
+
+  }
+}
