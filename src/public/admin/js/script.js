@@ -20,13 +20,13 @@ if (btnStatus.length > 0) {
   });
 }
 // end  button status
-
 const search = document.querySelector("#form-search");
 if (search) {
   let url = new URL(window.location.href);
   search.addEventListener("submit", (e) => {
     e.preventDefault();
     const searchValue = e.target[0].value;
+    console.log(searchValue);
 
     if (searchValue) {
       url.searchParams.set("keyword", searchValue);
@@ -36,7 +36,7 @@ if (search) {
 
     e.target[0].value = e.target[0].value.trim();
 
-    windw.location.href = url.href;
+    window.location.href = url.href;
   });
 }
 
