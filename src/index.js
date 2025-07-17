@@ -23,6 +23,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use('/tinymce', express.static(path.join(__dirname,"..", 'node_modules', 'tinymce')));
+
+
 app.use(
   session({
     secret: "your-secret-key", // Replace with a strong, unique secret key

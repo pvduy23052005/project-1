@@ -28,6 +28,7 @@
     "multer-storage-cloudinary": "^4.0.0",
     "pug": "^3.0.3",
     "serverless-http": "^3.2.0",
+    "tinymce": "^7.9.1",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
