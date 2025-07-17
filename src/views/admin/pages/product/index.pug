@@ -24,9 +24,26 @@ block main
   .card.mb-4
     .card-header
       .row 
-        .col-6 
+        .col-4
           +form-change-multi()
-        .col-6 
+        .col-4
+          .sort  
+            select(
+              name="sort", 
+              class="form-control" 
+              sort-select 
+              )
+              option(value="price-desc") Giá giảm dần
+              option(value="price-asc") Giá tăng dần
+              option(value="title-asc") Tiêu đề A - Z
+              option(value="title-desc") Tiêu đề Z - A
+            .button-clear 
+              button(
+                class="btn btn-outline-secondary"
+                type="button"
+                sort-clear
+              ) Xóa bộ lọc
+        .col-4 
           a(href="/admin/products/create" class="btn btn-outline-success")  + Thêm mới
 
   table(

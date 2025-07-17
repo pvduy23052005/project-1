@@ -29,8 +29,17 @@ module.exports.index = async (req, res) => {
     countProducts
   );
 
+  // sort .
+  let sort = {};
+
+  if (req.query.sortKey && req.query.sortValue ) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  } else {
+    sort.position = "desc";
+  }
+
   const products = await Product.find(find)
-    .sort({ position: "desc" })
+    .sort(sort)
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
 
@@ -188,10 +197,10 @@ module.exports.editProductPatch = async (req, res) => {
 //[get] admin/products/detail/:id
 module.exports.detailProductGet = async (req, res) => {
   try {
-    const find = { 
+    const find = {
       deleted: false,
-      _id: req.params.id
-    }
+      _id: req.params.id,
+    };
     const product = await Product.findOne(find);
     if (!product) {
       req.flash("error", "Không tìm thấy sản phẩm");

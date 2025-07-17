@@ -137,3 +137,37 @@ if (thumbnailInput) {
   });
 }
 // end preview image
+
+//sort select
+const sort = document.querySelector("[sort-select]");
+if (sort) {
+  const url = new URL(window.location.href);
+  const sortClear = document.querySelector("[sort-clear]");
+
+  sort.addEventListener("change", (e) => {
+    e.preventDefault();
+    const [sortKey, sortValue] = e.target.value.split("-");
+    url.searchParams.set("sortKey", sortKey);
+    url.searchParams.set("sortValue", sortValue);
+    window.location.href = url.href;
+  });
+
+  sortClear.addEventListener("click", (e) => {
+    e.preventDefault();
+    url.searchParams.delete("sortKey");
+    url.searchParams.delete("sortValue");
+    window.location.href = url.href;
+  });
+
+  const sortKey = url.searchParams.get("sortKey");
+  const sortValue = url.searchParams.get("sortValue");
+  if (sortKey && sortValue) {
+    const selectOption = sort.querySelector(
+      `option[value="${sortKey}-${sortValue}"]`
+    );
+    if (selectOption) {
+      selectOption.selected = true;
+    }
+  }
+}
+// end sort select
