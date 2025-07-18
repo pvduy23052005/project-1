@@ -1,0 +1,50 @@
+extends ../../layout/default.pug
+include ../../mixins/box-alert.pug
+include ../../mixins/select-tree.pug
+
+block main
+
+  h1.mb-5 Thêm mới danh mục
+
+  +box-alert-warning(5000)
+
+  .card.mb-5.text-start
+    .card-header.mb-2 Thông tin danh mục
+    .card-body
+      form(method="POST", action="/admin/category/create", 
+        enctype="multipart/form-data"
+      )
+        .form-group.mb-3
+          label(for="title") Tiêu đề danh mục
+          input(type="text", class = "form-control" name="title" id="title", required  )
+
+        .form-group.mb-3  
+          label(for="parent_id") Danh mục cha
+          select(class = "form-control" name="parent_id" id="parent_id")
+            option(value="") Không có danh mục cha
+              +select-tree(categoryTree , 1)
+
+        .form-group.mb-3
+          label(for="description") Mô tả
+          textarea(
+            name="description", 
+            style = "height: 100px; witdh : 100%",
+            class = "form-control textarea-mce" id="description")
+
+        .form-group.mb-3
+          label(for="thumbnail") Ảnh đại diện
+          input(type="file",
+            class = "form-control" name="thumbnail" id="thumbnail" accept="image/*")
+          img(src="", id = "preview" alt="" style="max-width: 150px; margin-top: 10px;")
+
+        .form-group.mb-3
+          label(for="status") Trạng thái
+          select( class = "form-control" name="status" id="status")
+            option(value="active" selected) Hoạt động
+            option(value="inactive") Không hoạt động
+
+        .form-group.mb-4
+          label(for="position") Vị trí hiển thị
+          input(type="number", class = "form-control" name="position" id="position" placeholder="Tự động tăng")
+
+        button.btn.btn-success.text-align-end(type="submit") Tạo sản phẩm
