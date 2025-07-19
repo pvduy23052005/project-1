@@ -33,16 +33,16 @@ mixin table-tree( records , level ,index  )
           href = `/admin/category/edit/${item._id}`
           class = "btn btn-warning btn-sm"
           data-id = item._id 
-        ) Sửa 
+        ) <i class="fa-solid fa-pen-to-square"></i>
         button(
           button-delete
           data-id = item._id  
           class = "btn btn-danger btn-sm ml-1"
-        ) Xóa 
+        ) <i class="fa-solid fa-trash"></i> 
         a(
           href=`/admin/category/detail/${item._id}`
           class = "btn btn-secondary btn-sm"
-          ) Chi tiet
+          ) <i class="fa-solid fa-circle-info"></i>
 
     if item.children && item.children.length > 0 
       +table-tree(item.children , level + 1 , index + 1)

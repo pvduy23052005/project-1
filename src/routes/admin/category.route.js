@@ -12,5 +12,4 @@ router.post(
   uploadCloud.single("thumbnail"),
   categoryController.createPost
 );
-
 module.exports = router;

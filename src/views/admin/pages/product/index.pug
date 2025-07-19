@@ -13,7 +13,16 @@ block main
   h1 Danh sach Sản phẩm
 
   .card.mb-3.text-start
-    .card-header.mb-2 Bộ lọc và Tìm kiếm
+    .card-header.mb-2 
+      .row 
+        .col-6
+          span Bộ lọc và Tìm kiếm
+        .col-6.text-end 
+          button(
+                class="btn btn-outline-secondary"
+                type="button"
+                sort-clear
+              ) <i class="fa-solid fa-arrows-rotate"></i>
     .card-body
       .row
         .col-6
@@ -27,7 +36,7 @@ block main
         .col-4
           +form-change-multi()
         .col-4
-          .sort  
+          .sort.display-flex
             select(
               name="sort", 
               class="form-control" 
@@ -36,15 +45,10 @@ block main
               option(value="price-desc") Giá giảm dần
               option(value="price-asc") Giá tăng dần
               option(value="title-asc") Tiêu đề A - Z
-              option(value="title-desc") Tiêu đề Z - A
-            .button-clear 
-              button(
-                class="btn btn-outline-secondary"
-                type="button"
-                sort-clear
-              ) Xóa bộ lọc
+              option(value="title-desc") Tiêu đề Z - A        
         .col-4 
-          a(href="/admin/products/create" class="btn btn-outline-success")  + Thêm mới
+          a(href="/admin/products/create" class="btn btn-outline-success")  
+            <i class="fa-solid fa-plus"></i> Tạo mới
 
   table(
     class = "table table-hover table-sm"
@@ -89,14 +93,14 @@ block main
             a(class="btn btn-warning btn-sm"
               href = `/admin/products/edit/${item._id}`
               button-edit
-             ) Sửa
+             ) <i class="fa-solid fa-pen-to-square"></i>
             button(class="btn btn-danger btn-sm ml-1"
               data-id = item._id
               button-delete
-              ) Xóa
+              ) <i class="fa-solid fa-trash"></i>
             a(href=`/admin/products/detail/${item._id}`
               class = "btn btn-secondary btn-sm "
-              ) Chi tiết
+              ) <i class="fa-solid fa-circle-info"></i>
 
   +pagination(pagination)
 
