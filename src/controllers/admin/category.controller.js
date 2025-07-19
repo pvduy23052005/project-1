@@ -58,3 +58,63 @@ module.exports.createPost = async (req, res) => {
 
   res.redirect("/admin/category");
 };
+
+// [get] admin/category/edit/:id
+module.exports.editGet = async (req, res) => {
+  const id = req.params.id;
+  const find = {
+    deleted: false,
+    _id: id,
+    status: "active",
+  };
+
+  const category = await Category.findOne(find);
+
+  const categories = await Category.find({
+    deleted: false,
+  });
+
+  const categoryTree = buildCategoryTree(categories, "");
+
+  let parentCategory = null;
+
+  if (category.parent_id !== "") {
+    parentCategory = await Category.findOne({
+      _id: category.parent_id,
+    });
+  }
+
+  if (!category) {
+    req.flash("error", "Danh mục không tồn tại");
+    return res.redirect("/admin/category");
+  }
+
+  res.render("admin/pages/category/edit", {
+    title: "Chỉnh sửa danh mục",
+    category: category,
+    parentCategory: parentCategory,
+    categoryTree: categoryTree,
+  });
+};
+
+// [patch] admin/category/edit/:id
+module.exports.editPatch = async (req, res) => {
+  console.log(req.body);
+
+  const thumbnail = req.file ? req.file.path : "";
+
+  if( thumbnail !== ""){
+    req.body.thumbnail = thumbnail ; 
+  }
+
+  try {
+    await Category.updateOne({
+      _id: req.params.id,
+    } , req.body);
+    req.flash("success", "Cập nhật thành công");
+  } catch (error) {
+    req.flash("error", "Cập nhật thất bại ");
+  }
+
+  res.redirect(`/admin/category/edit/${req.params.id}`);
+};

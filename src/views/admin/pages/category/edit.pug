@@ -1,0 +1,62 @@
+extends ../../layout/default.pug
+include ../../mixins/box-alert.pug
+include ../../mixins/select-tree.pug
+
+block main
+
+  h1.mb-4 Chỉnh sửa danh mục
+
+  +box-alert-warning(5000)
+  +box-alert-success(5000)
+  +box-alert-error(5000)
+
+  .card.mb-5.text-start
+    .card-header.mb-2 Thông tin danh mục
+    .card-body
+      form(method="POST",
+        action=`/admin/category/edit/${category._id}?_method=PATCH`, 
+        id="form-edit-category" 
+        enctype="multipart/form-data"
+      )
+
+        .form-group.mb-3
+          label(for="name") Tên danh mục
+          input(type="text", 
+            value=category.title || "", 
+            class = "form-control" name="title" id="title" placeholder="Nhập tên danh mục" required)
+
+        .form-group.mb-3
+          label(for="title") Tiêu đề danh mục
+          select(name="parent_id" class="form-control" id="parent_id")
+            - if(parentCategory && parentCategory.id === category.parent_id)
+              option(value=parentCategory._id, selected = true) #{parentCategory.title}
+            - else
+              option(value="") Chọn danh mục cha
+            +select-tree(categoryTree, 0)
+
+        .form-group.mb-3
+          label(for="description") Mô tả
+          textarea(name="description", 
+            style = "height: 100px; witdh : 100%",
+            class = "form-control textarea-mce" id="description") #{category.description || ""} 
+
+        .form-group.mb-3
+          label(for="thumbnail") Ảnh đại diện
+          input(type="file",
+            class = "form-control" name="thumbnail" id="thumbnail" accept="image/*")
+          img(src=category.thumbnail || "",
+             id = "preview" alt="" style="max-width: 150px; margin-top: 10px;")
+
+        .form-group.mb-3
+          label(for="status") Trạng thái
+          select( class = "form-control" name="status" id="status")
+            option(value="active", selected = category.status === 'active') Hoạt động
+            option(value="inactive", selected = category.status === 'inactive') Không hoạt động
+
+        .form-group.mb-4
+          label(for="position") Vị trí hiển thị
+          input(type="number",
+            value = category.position || "",
+            class = "form-control" name="position" id="position" min="0" placeholder="Tự động tăng" )
+
+        button.btn.btn-success.text-align-end(type="submit") Cập nhật 

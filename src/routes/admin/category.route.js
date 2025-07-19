@@ -12,4 +12,13 @@ router.post(
   uploadCloud.single("thumbnail"),
   categoryController.createPost
 );
+
+router.get("/edit/:id" , categoryController.editGet);
+
+router.patch(
+  "/edit/:id",
+  uploadCloud.single("thumbnail"),
+  categoryController.editPatch
+);
+
 module.exports = router;
