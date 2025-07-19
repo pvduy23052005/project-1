@@ -1,5 +1,6 @@
 extends ../../layout/default.pug
 include ../../mixins/box-alert.pug
+include ../../mixins/select-tree.pug
 
 block main
 
@@ -22,6 +23,12 @@ block main
           input(type="text", 
             value = product.title || "",
             class = "form-control" name="title" id="title", required  )
+
+        .form-group.mb-3
+          label(for="category") Tiêu đề danh mục
+          select(name="category" class="form-control" id="category")
+            option(value="") -- Chọn danh mục cha --
+            +select-tree(categoryTree, product.category  , 1)
 
         .form-group.mb-3
           label(for="description") Mô tả

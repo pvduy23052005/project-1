@@ -67,32 +67,19 @@ module.exports.editGet = async (req, res) => {
     _id: id,
     status: "active",
   };
-
   const category = await Category.findOne(find);
-
   const categories = await Category.find({
     deleted: false,
   });
-
   const categoryTree = buildCategoryTree(categories, "");
-
-  let parentCategory = null;
-
-  if (category.parent_id !== "") {
-    parentCategory = await Category.findOne({
-      _id: category.parent_id,
-    });
-  }
-
   if (!category) {
     req.flash("error", "Danh mục không tồn tại");
     return res.redirect("/admin/category");
   }
-
+  
   res.render("admin/pages/category/edit", {
     title: "Chỉnh sửa danh mục",
     category: category,
-    parentCategory: parentCategory,
     categoryTree: categoryTree,
   });
 };

@@ -22,7 +22,7 @@ block main
           label(for="parent_id") Danh mục cha
           select(class = "form-control" name="parent_id" id="parent_id")
             option(value="") Không có danh mục cha
-              +select-tree(categoryTree , 1)
+              +select-tree(categoryTree , "" ,  1)
 
         .form-group.mb-3
           label(for="description") Mô tả

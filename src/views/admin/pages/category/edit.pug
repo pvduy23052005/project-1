@@ -28,11 +28,8 @@ block main
         .form-group.mb-3
           label(for="title") Tiêu đề danh mục
           select(name="parent_id" class="form-control" id="parent_id")
-            - if(parentCategory && parentCategory.id === category.parent_id)
-              option(value=parentCategory._id, selected = true) #{parentCategory.title}
-            - else
-              option(value="") Chọn danh mục cha
-            +select-tree(categoryTree, 0)
+            option(value="") Chọn danh mục cha
+            +select-tree(categoryTree, category.parent_id, 1)
 
         .form-group.mb-3
           label(for="description") Mô tả

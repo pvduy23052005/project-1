@@ -1,6 +1,8 @@
 const Product = require("../../models/product.model");
 const listButtonStatusHelpers = require("../../helpers/listButtonStatus");
 const pagenationHelpers = require("../../helpers/pagination");
+const Category = require("../../models/category.model");
+const buildCategoryTree = require("../../helpers/buildCategoryTree.js");
 
 //[get] admin/products
 module.exports.index = async (req, res) => {
@@ -32,7 +34,7 @@ module.exports.index = async (req, res) => {
   // sort .
   let sort = {};
 
-  if (req.query.sortKey && req.query.sortValue ) {
+  if (req.query.sortKey && req.query.sortValue) {
     sort[req.query.sortKey] = req.query.sortValue;
   } else {
     sort.position = "desc";
@@ -121,9 +123,18 @@ module.exports.deleteProduct = async (req, res) => {
 };
 
 //[get] admin/products/create
-module.exports.createProductGet = (req, res) => {
+module.exports.createProductGet = async (req, res) => {
+  const find = {
+    deleted: false,
+  };
+
+  const category = await Category.find(find);
+
+  const categories = buildCategoryTree(category, "");
+
   res.render("admin/pages/product/create", {
     title: "Thêm sản phẩm",
+    categories: categories,
   });
 };
 
@@ -163,9 +174,16 @@ module.exports.editProductGet = async (req, res) => {
     const id = req.params.id;
     const editProduct = await Product.findOne({ _id: id, deleted: false });
 
+    const find = {
+      deleted: false,
+    };
+    const category = await Category.find(find);
+    const categoryTree = buildCategoryTree(category, "");
+
     res.render("admin/pages/product/edit", {
       title: "Chỉnh sửa sản phẩm",
       product: editProduct,
+      categoryTree : categoryTree 
     });
   } catch (error) {
     req.flash("error", "Không tìm thấy sản phẩm");
@@ -185,7 +203,6 @@ module.exports.editProductPatch = async (req, res) => {
     req.body.position = parseInt(req.body.position);
 
     await Product.updateOne({ _id: req.params.id }, req.body);
-
     req.flash("success", "Cập nhật sản phẩm thành công");
     res.redirect("/admin/products/edit/" + req.params.id);
   } catch (error) {

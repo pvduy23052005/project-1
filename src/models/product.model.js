@@ -8,6 +8,11 @@ const productSchema = new mongoose.Schema(
       required: true,
       trim: true, // tuy chỉnh khoảng trắng ở đầu và cuối
     },
+    category: {
+      type : String , 
+      default : "" , 
+      trim : true  
+    },
     slug: {
       type: String,
       slug: "title", // Tạo slug từ trường `title`
@@ -50,6 +55,6 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-mongoose.plugin(slug); 
+mongoose.plugin(slug);
 const Product = mongoose.model("Product", productSchema, "products");
 module.exports = Product;
