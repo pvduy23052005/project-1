@@ -1,0 +1,17 @@
+extends ../../layout/default.pug
+
+block main
+  h1 Thêm nhóm quyền
+
+  form(action="/admin/roles/create", method="POST", autocomplete="off")
+
+    .form-group
+      label(for="title") Tiêu đề
+      input(type="text", name="title", class = "form-control" required)
+
+    .form-group.mb-3
+      label(for="description") Miêu tả
+      input(type="text", class = "form-control"  name="description")
+
+    .form-group
+      button.btn.btn-primary(type="submit") Thêm mới
