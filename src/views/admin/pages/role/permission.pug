@@ -85,6 +85,29 @@ block main
         each role in roles 
           .col-4.text-center 
             input(type="checkbox" name="")
+  .card.mt-3
+    .card-header.text-start Nhóm quyền
+    .card-body
+      div.mb-3(data-name = "role_create" class = "row")
+        .col-4.text-start Thêm Nhóm quyền
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = "role_edit" class = "row")
+        .col-4.text-start Sửa Nhóm quyền
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = "role_delete" class = "row")
+        .col-4.text-start Xóa Nhóm quyền
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = "role_view" class = "row")
+        .col-4.text-start Xem Nhóm quyền
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
 
   form(
     id="form-change-permissions"
