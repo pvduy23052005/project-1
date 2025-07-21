@@ -59,8 +59,8 @@ if (formChangeMulti) {
     const table = document.querySelector("[checkbox-all]");
     const inputChecked = table.querySelectorAll("input[name='id']:checked");
     const inputSubmit = formChangeMulti.querySelector("input[name='listId']");
-
     const typeChange = e.target[0].value;
+
     if (typeChange === "delete") {
       const isConfirm = confirm(
         "Bạn có chắc chắn muốn xóa các sản phẩm này không?"

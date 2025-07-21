@@ -18,12 +18,16 @@ a {
 .body {
   display: flex;
   flex-direction: row;
+  height: calc(100vh - 65px); /* 60px là chiều cao header */
+  overflow: hidden; /* Không cho body cuộn */
 }
 
 .sider {
   height: 100vh;
   background-color: #00a6ff;
   border-right: 2px;
+  flex-shrink: 0; /* Giữ sider cố định */
+  overflow: hidden; /* Không cuộn sider */
 }
 
 .sider .inner-menu {
@@ -52,6 +56,7 @@ a {
   padding: 20px;
   text-align: center;
   background-color: #f0f0f0;
+  overflow-y: auto; /* Chỉ cuộn phần main */
 }
 
 .body .main table {
@@ -83,7 +88,7 @@ a {
 
 /* Show Alert */
 
-.body [show-alert]{
+.body [show-alert] {
   position: fixed; /* Giữ vị trí cố định trên màn hình */
   top: 70px; /* Cách mép trên 70px */
   right: 15px; /* Cách mép phải 15px */
@@ -117,13 +122,13 @@ a {
   }
 }
 
-.body [show-alert] span{
+.body [show-alert] span {
   font-weight: 600;
 }
 
-.body [show-alert] i{
-  margin-left: 10px; 
-  cursor: pointer; 
-  font-size : 20px ; 
+.body [show-alert] i {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 20px;
 }
 /* End Show Alert */
