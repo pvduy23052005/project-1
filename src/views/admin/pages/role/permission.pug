@@ -1,0 +1,104 @@
+extends ../../layout/default.pug
+include ../../mixins/box-alert.pug
+
+block main 
+  +box-alert-success(5000)
+  +box-alert-error(5000)
+
+
+  .row.mb-5
+    .col-6.text-start Phân quyền 
+    .col-6.text-end 
+      button.btn.btn-primary.mb-3(
+        button-submit
+        type="submit" class="button-submit") Cập nhật
+  div(
+    data-permission = roles
+  )
+  .card
+    .card-header 
+      .row 
+        .col-4 
+        each role in roles 
+          .col-4.text-center 
+            span #{role.title}
+            input(
+              name-id = role.id
+              type="text" 
+              hidden
+              )
+
+    .card-body 
+      .row 
+        .col-4.text-start
+          span Chọn tất cả
+        .col-4.text-center 
+          input(type="checkbox" name="")
+        .col-4.text-center 
+          input(type="checkbox" name="")
+
+  .card.mt-3
+    .card-header.text-start Sản phẩm 
+    .card-body
+      div(role-permission)
+        div.mb-3(data-name = "product_create" class = "row")
+          .col-4.text-start Thêm sản phẩm
+          each role in roles 
+            .col-4.text-center 
+              input( type="checkbox" name="")
+        div.mb-3(data-name = "product_edit" class = "row")
+          .col-4.text-start Sửa sản phẩm
+          each role in roles 
+            .col-4.text-center 
+              input(type="checkbox" name="")
+        div.mb-3(data-name = "product_delete" class = "row")
+          .col-4.text-start Xóa sản phẩm
+          each role in roles 
+            .col-4.text-center 
+              input(type="checkbox" name="")
+        div.mb-3(data-name = "product_view" class = "row")
+          .col-4.text-start Xem
+          each role in roles 
+            .col-4.text-center 
+              input(type="checkbox" name="") 
+
+  .card.mt-3
+    .card-header.text-start Danh mục sản phẩm
+    .card-body
+      div.mb-3(data-name = "product-category_create" class = "row")
+        .col-4.text-start Thêm danh mục 
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = "product-category_edit" class = "row")
+        .col-4.text-start Sửa Danh mục 
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = "product-category_delete" class = "row")
+        .col-4.text-start Xóa danh mục
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = "product-category_view" class = "row")
+        .col-4.text-start Xem
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+
+  form(
+    id="form-change-permissions"
+    method="POST"
+    action=`/admin/role/permission?_method=PATCH`
+    hidden
+  )
+    input(
+      type="text"
+      name="permissions"
+      input-permission 
+      class="form-control"
+    )
+  script(src="/admin/js/role.js")
+
+
+

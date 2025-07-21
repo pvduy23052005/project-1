@@ -8,4 +8,8 @@ router.get("/create" , controller.createGet);
 
 router.post("/create" , controller.createPost);
 
+router.get("/permission" , controller.permissionGet);
+
+router.patch("/permission" , controller.permissionPatch)
+
 module.exports = router ; 
