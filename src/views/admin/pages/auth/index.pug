@@ -1,12 +1,20 @@
+include ../../mixins/box-alert.pug
+
 doctype html
 html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css")
+    link(rel="stylesheet" href="/client/css/boostrap.css")
+    link(rel="stylesheet" href="/admin/css/style.css")
     link(rel="stylesheet" href="/admin/css/auth.css")
     title #{title}
   body 
+
+    +box-alert-success(5000)
+    +box-alert-warning(5000)
+    +box-alert-error(5000)
 
     .container  
 
@@ -18,11 +26,12 @@ html(lang="en")
           method="post"
             ) 
             .input-group
-              input(type="text" id ="fullName" class = "input-control" required) 
+              input(type="" id ="email" 
+                value = email || "" name = "email" class = "input-control" required) 
               label(for="fullName" class = "text-label" ) Tài khoản
 
             .input-group 
-              input(type="password" id ="password"  class = "input-control" required)
+              input(type="password" id ="password"  name = "password" class = "input-control" required)
               label(for="password" class = "text-label" ) Mật khẩu
             button() Login
 

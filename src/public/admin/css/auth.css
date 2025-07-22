@@ -26,7 +26,7 @@ body {
 .container h1 {
   color: #fff;
   font-size: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .form-login {
@@ -51,22 +51,20 @@ body {
 
 .form-login .input-group input {
   position: absolute;
-  box-shadow: none;
   outline: none;
   height: 100%;
   width: 100%;
-  border: none;
   background-color: transparent;
   z-index: 999;
   border: 2px solid #fff;
-  border-radius: 10px;
   color: #fff;
   font-size: 25px;
   padding: 0 32px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  border-radius: 10px !important;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -ms-border-radius: 10px !important;
+  -o-border-radius: 10px !important;
 }
 
 .form-login .input-group label {
@@ -112,25 +110,81 @@ body {
   z-index: 999;
 }
 
-button{
-  background-color:#ffc800 ;
-  border:  0;
-  color: #fff ;
-  font-size: 25px ;
-  padding: 5px 20px ;
-  border-radius: 10px ;
-  -webkit-border-radius: 10px ;
-  -moz-border-radius: 10px ;
-  -ms-border-radius: 10px ;
-  -o-border-radius: 10px ;
+button {
+  background-color: #ffc800;
+  border: 0;
+  color: #fff;
+  font-size: 25px;
+  padding: 5px 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-button:hover{
-  border : 2px solid #fff ;
-  color :#ffc800 ;
+button:hover {
+  border: 2px solid #fff;
+  color: #ffc800;
   background: none;
 }
 
+/* Show Alert */
+
+[show-alert] {
+  position: fixed;
+  /*Giữvịtrícốđịnhtrênmànhình*/
+  top: 70px;
+  /*Cáchméptrên70px*/
+  right: 15px;
+  /*Cáchmépphải15px*/
+  z-index: 9999;
+  /*Đảmbảonóluônnằmtrêncùng*/
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  /*Mặcđịnhlàhiện,sẽdùngJSđểthêmclassẩn*/
+  transition: opacity 0.3s ease;
+  /*Thêmtransitionchoopacitynếumuốnmờdần*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-transition: opacity 0.3s ease;
+  -moz-transition: opacity 0.3s ease;
+  -ms-transition: opacity 0.3s ease;
+  -o-transition: opacity 0.3s ease;
+}
+
+[show-alert].alert-hidden {
+  animation-name: alert-hidden; /* Tên animation đã định nghĩa */
+  animation-duration: 0.5s; /* Thời gian chạy animation là 0.5 giây */
+  animation-fill-mode: both; /* Giữ trạng thái cuối cùng của animation */
+}
+
+/* Định nghĩa keyframes cho hiệu ứng ẩn */
+@keyframes alert-hidden {
+  from {
+    right: 15px; /* Bắt đầu từ vị trí hiện tại (15px từ phải) */
+    opacity: 1; /* Mặc định là hiện */
+  }
+  to {
+    right: -100%; /* Dịch chuyển ra ngoài màn hình về phía bên phải */
+    opacity: 0; /* Mờ dần */
+    display: none; /* Cuối cùng ẩn hoàn toàn phần tử */
+  }
+}
+
+[show-alert] span {
+  font-weight: 600;
+}
+
+[show-alert] i {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+/* End Show Alert */
