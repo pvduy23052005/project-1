@@ -10,7 +10,7 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const flash = require("express-flash");
-const serverless = require("serverless-http");
+const cookieParser = require('cookie-parser');
 
 const port = process.env.PORT;
 const app = express();
@@ -22,6 +22,8 @@ app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+
 
 app.use('/tinymce', express.static(path.join(__dirname,"..", 'node_modules', 'tinymce')));
 

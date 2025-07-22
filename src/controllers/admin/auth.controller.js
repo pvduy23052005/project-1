@@ -26,7 +26,6 @@ module.exports.loginPost = async (req, res) => {
     return;
   }
 
-
   if (checkEmail.password != md5(password)) {
     req.flash("error", "password not correct");
     res.redirect("/admin/auth/login");
@@ -41,5 +40,6 @@ module.exports.loginPost = async (req, res) => {
     res.redirect("/admin/auth/login");
     return;
   }
+  res.cookie("token", checkEmail.token);
   res.redirect("/admin/dashboard");
 };
