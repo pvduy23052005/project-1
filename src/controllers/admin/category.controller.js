@@ -1,5 +1,6 @@
 const Category = require("../../models/category.model");
 const buildCategoryTree = require("../../helpers/buildCategoryTree.js");
+const md5 = require("md5");
 
 // [get] admin/category
 module.exports.index = async (req, res) => {
@@ -38,7 +39,6 @@ module.exports.createPost = async (req, res) => {
   let find = {
     deleted: false,
   };
-
   const thumbnail = req.file ? req.file.path : "";
   req.body.thumbnail = thumbnail;
   if (req.body.position == "") {
@@ -47,7 +47,6 @@ module.exports.createPost = async (req, res) => {
   } else {
     res.body.postion = parseInt(req.body.position);
   }
-
   try {
     const newCategory = new Category(req.body);
     await newCategory.save();
@@ -55,7 +54,6 @@ module.exports.createPost = async (req, res) => {
   } catch (error) {
     req.flash("error", "Tạo mới thất bại: " + error.message);
   }
-
   res.redirect("/admin/category");
 };
 

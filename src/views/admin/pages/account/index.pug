@@ -12,7 +12,7 @@ block main
       .row
         .col-6.text-start  Danh Sách
         .col-6.text-end
-          a.btn.btn-outline-success(href="/admin/accounts/create") + Thêm mới
+          a.btn.btn-outline-success(href="/admin/account/create") + Thêm mới
 
     .card-body
       table.table.table-hover.table-sm
@@ -45,13 +45,13 @@ block main
                   ) Không hoạt động
               td
                 a(class="btn btn-warning btn-sm"
-                href = `/admin/products/edit/${item._id}`
+                href = `/admin/acount/edit/${item._id}`
                 button-edit
                 ) <i class="fa-solid fa-pen-to-square"></i>
                 button(class="btn btn-danger btn-sm ml-1"
                   data-id = item._id
                   button-delete
                   ) <i class="fa-solid fa-trash"></i>
-                a(href=`/admin/products/detail/${item._id}`
+                a(href=`/admin/acount/detail/${item._id}`
                   class = "btn btn-secondary btn-sm "
                   ) <i class="fa-solid fa-circle-info"></i>
