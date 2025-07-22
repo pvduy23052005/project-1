@@ -23,14 +23,47 @@ a {
 }
 
 .sider {
-  height: 100vh;
+  height: calc(100vh - 65px);
   background-color: #00a6ff;
   border-right: 2px;
   flex-shrink: 0; /* Giữ sider cố định */
   overflow: hidden; /* Không cuộn sider */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.sider .inner-menu {
+.sider .box-logout {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.sider .box-logout a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sider .box-logout a span {
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.sider .box-logout a:hover {
+  border: 2px solid #fff;
+  border-radius: 10px ;
+  -webkit-border-radius: 10px ;
+  -moz-border-radius: 10px ;
+  -ms-border-radius: 10px ;
+  -o-border-radius: 10px ;
+  padding:  5px;
+  color : #00A1FF;
+  background-color: #fff;
+}
+
+.sider .box-logout a .sider .inner-menu {
   width: 100%;
 }
 
