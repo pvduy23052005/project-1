@@ -1,0 +1,24 @@
+mixin box-role(roles , title , titleView )
+  .card.mb-3
+    .card-header.text-start #{titleView}
+    .card-body
+      div.mb-3(data-name = `${title}_create`  class = "row")
+        .col-4.text-start Thêm #{titleView}
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = `${title}_edit` class = "row")
+        .col-4.text-start Sửa #{titleView}
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = `${title}_delete` class = "row")
+        .col-4.text-start Xóa #{titleView}
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")
+      div.mb-3(data-name = `${title}_view` class = "row")
+        .col-4.text-start Xem #{titleView}
+        each role in roles 
+          .col-4.text-center 
+            input(type="checkbox" name="")

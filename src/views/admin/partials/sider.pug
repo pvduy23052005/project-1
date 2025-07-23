@@ -3,16 +3,21 @@ sider.sider
     ul 
       li  
         a(href=`/admin/dashboard`) Dashboard
-      li 
-        a(href=`/admin/products`) Products
-      li 
-        a(href=`/admin/category`) Category
-      li
-        a(href="/admin/role") Roles 
-      li 
-        a(href="/admin/role/permission") permission
-      li  
-        a(href="/admin/account") account
+      if role.permissions[0].includes("product_view")
+        li 
+          a(href=`/admin/products`) Products
+      if role.permissions[0].includes("product-category_view")
+        li 
+          a(href=`/admin/category`) Category
+      if role.permissions[0].includes("role_view")
+        li
+          a(href="/admin/role") Roles 
+      if role.permissions[0].includes("permission_view")
+        li 
+          a(href="/admin/role/permission") permission
+      if role.permissions[0].includes("account_view")
+        li  
+          a(href="/admin/account") account
   .box-logout 
     a(href="/admin/auth/logout" class = "box-login") 
       span Đăng xuất

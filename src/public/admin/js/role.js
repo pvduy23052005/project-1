@@ -1,7 +1,5 @@
-//permissions
-const rolePermission = document.querySelectorAll("[role-permission]");
 
-if (rolePermission) {
+if (true) {
   const buttonSubmit = document.querySelector("[button-submit]");
   const listRoleId = document.querySelectorAll("[name-id]");
   const formPermission = document.querySelector("#form-change-permissions");

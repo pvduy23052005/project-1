@@ -17,10 +17,11 @@ const accountSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: randomString.randomString(20),
+      require: true,
     },
     token: {
       type: String,
+      default: randomString.randomString(20),
     },
     avatar: {
       type: String,

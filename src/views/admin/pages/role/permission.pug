@@ -1,10 +1,10 @@
 extends ../../layout/default.pug
 include ../../mixins/box-alert.pug
+include ../../mixins/box-role.pug
 
 block main 
   +box-alert-success(5000)
   +box-alert-error(5000)
-
 
   .row.mb-5
     .col-6.text-start Phân quyền 
@@ -12,10 +12,11 @@ block main
       button.btn.btn-primary.mb-3(
         button-submit
         type="submit" class="button-submit") Cập nhật
+
   div(
-    data-permission = roles
+  data-permission = roles
   )
-  .card
+  .card.mb-3
     .card-header 
       .row 
         .col-4 
@@ -37,74 +38,24 @@ block main
         .col-4.text-center 
           input(type="checkbox" name="")
 
-  .card.mt-3
-    .card-header.text-start Sản phẩm 
-    .card-body
-      div(role-permission)
-        div.mb-3(data-name = "product_create" class = "row")
-          .col-4.text-start Thêm sản phẩm
-          each role in roles 
-            .col-4.text-center 
-              input( type="checkbox" name="")
-        div.mb-3(data-name = "product_edit" class = "row")
-          .col-4.text-start Sửa sản phẩm
-          each role in roles 
-            .col-4.text-center 
-              input(type="checkbox" name="")
-        div.mb-3(data-name = "product_delete" class = "row")
-          .col-4.text-start Xóa sản phẩm
-          each role in roles 
-            .col-4.text-center 
-              input(type="checkbox" name="")
-        div.mb-3(data-name = "product_view" class = "row")
-          .col-4.text-start Xem
-          each role in roles 
-            .col-4.text-center 
-              input(type="checkbox" name="") 
+  +box-role(roles , "product" , "Sản phẩm")
 
-  .card.mt-3
-    .card-header.text-start Danh mục sản phẩm
+  +box-role(roles , "product-category" , "Danh mục Sản phẩm")
+
+  +box-role(roles , "role" , "Nhóm quyền")
+
+  +box-role(roles , "account" , "Tài khoản")
+
+  .card.mb-3
+    .card-header.text-start Phân quyền 
     .card-body
-      div.mb-3(data-name = "product-category_create" class = "row")
-        .col-4.text-start Thêm danh mục 
+      div.mb-3(data-name = `permission_view`  class = "row")
+        .col-4.text-start Xem phân quyền 
         each role in roles 
           .col-4.text-center 
             input(type="checkbox" name="")
-      div.mb-3(data-name = "product-category_edit" class = "row")
-        .col-4.text-start Sửa Danh mục 
-        each role in roles 
-          .col-4.text-center 
-            input(type="checkbox" name="")
-      div.mb-3(data-name = "product-category_delete" class = "row")
-        .col-4.text-start Xóa danh mục
-        each role in roles 
-          .col-4.text-center 
-            input(type="checkbox" name="")
-      div.mb-3(data-name = "product-category_view" class = "row")
-        .col-4.text-start Xem
-        each role in roles 
-          .col-4.text-center 
-            input(type="checkbox" name="")
-  .card.mt-3
-    .card-header.text-start Nhóm quyền
-    .card-body
-      div.mb-3(data-name = "role_create" class = "row")
-        .col-4.text-start Thêm Nhóm quyền
-        each role in roles 
-          .col-4.text-center 
-            input(type="checkbox" name="")
-      div.mb-3(data-name = "role_edit" class = "row")
-        .col-4.text-start Sửa Nhóm quyền
-        each role in roles 
-          .col-4.text-center 
-            input(type="checkbox" name="")
-      div.mb-3(data-name = "role_delete" class = "row")
-        .col-4.text-start Xóa Nhóm quyền
-        each role in roles 
-          .col-4.text-center 
-            input(type="checkbox" name="")
-      div.mb-3(data-name = "role_view" class = "row")
-        .col-4.text-start Xem Nhóm quyền
+      div.mb-3(data-name = `permission_edit`  class = "row")
+        .col-4.text-start Sửa phân quyền . 
         each role in roles 
           .col-4.text-center 
             input(type="checkbox" name="")

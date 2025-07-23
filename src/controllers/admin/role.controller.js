@@ -57,7 +57,7 @@ module.exports.permissionPatch = async (req, res) => {
 
       await Role.updateOne(
         {
-          _id: roleId
+          _id: roleId,
         },
         {
           permissions: permissions,

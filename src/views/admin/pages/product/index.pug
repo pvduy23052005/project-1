@@ -19,10 +19,10 @@ block main
           span Bộ lọc và Tìm kiếm
         .col-6.text-end 
           button(
-                class="btn btn-outline-secondary"
-                type="button"
-                sort-clear
-              ) <i class="fa-solid fa-arrows-rotate"></i>
+            class="btn btn-outline-secondary"
+            type="button"
+            sort-clear
+          ) <i class="fa-solid fa-arrows-rotate"></i>
     .card-body
       .row
         .col-6
@@ -47,8 +47,9 @@ block main
               option(value="title-asc") Tiêu đề A - Z
               option(value="title-desc") Tiêu đề Z - A        
         .col-4 
-          a(href="/admin/products/create" class="btn btn-outline-success")  
-            <i class="fa-solid fa-plus"></i> Tạo mới
+          if role.permissions[0].includes("product_create")
+            a(href="/admin/products/create" class="btn btn-outline-success")  
+              <i class="fa-solid fa-plus"></i> Tạo mới
 
   table(
     class = "table table-hover table-sm"
@@ -90,14 +91,16 @@ block main
               change-status = `${item.status}-${item._id}`
               ) Không hoạt động
           td
-            a(class="btn btn-warning btn-sm"
-              href = `/admin/products/edit/${item._id}`
-              button-edit
-             ) <i class="fa-solid fa-pen-to-square"></i>
-            button(class="btn btn-danger btn-sm ml-1"
-              data-id = item._id
-              button-delete
-              ) <i class="fa-solid fa-trash"></i>
+            if role.permissions[0].includes("product_edit")
+              a(class="btn btn-warning btn-sm"
+                href = `/admin/products/edit/${item._id}`
+                button-edit
+              ) <i class="fa-solid fa-pen-to-square"></i>
+            if role.permissions[0].includes("product_delete")
+              button(class="btn btn-danger btn-sm ml-1"
+                data-id = item._id
+                button-delete
+                ) <i class="fa-solid fa-trash"></i>
             a(href=`/admin/products/detail/${item._id}`
               class = "btn btn-secondary btn-sm "
               ) <i class="fa-solid fa-circle-info"></i>
