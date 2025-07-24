@@ -47,6 +47,7 @@ module.exports.index = async (req, res) => {
     .skip(objectPagination.skip);
 
   for (const product of products) {
+    // select user create
     const user = await Account.findOne({
       _id: product.createBy.account_id,
     });
@@ -55,6 +56,15 @@ module.exports.index = async (req, res) => {
       product.userCreate = user.fullName;
     } else {
       product.userCreate = "Chưa có người tạo ";
+    }
+
+    // selecti user edit .
+    const updatedBy = product.updatedBy[product.updatedBy.length - 1];
+    if (updatedBy) {
+      const userUpdate = await Account.findOne({
+        _id: updatedBy.account_id,
+      }).select("fullName");
+      product.userUpdated = userUpdate.fullName;
     }
   }
 
@@ -73,7 +83,19 @@ module.exports.changeStatus = async (req, res) => {
   const id = req.params.id;
 
   try {
-    await Product.updateOne({ _id: id }, { status: newStatus });
+    const updatedBy = {
+      account_id: res.locals.user.id,
+      updateTime: new Date(),
+    };
+    await Product.updateOne(
+      { _id: id },
+      {
+        status: newStatus,
+        $push: {
+          updatedBy: updatedBy,
+        },
+      }
+    );
     req.flash("success", "Cập nhật trạng thái sản phẩm thành công");
     res.redirect(`/admin/products?page=${req.query.page || 1}`);
   } catch (error) {
@@ -237,7 +259,19 @@ module.exports.editProductPatch = async (req, res) => {
     req.body.stock = parseInt(req.body.stock);
     req.body.position = parseInt(req.body.position);
 
-    await Product.updateOne({ _id: req.params.id }, req.body);
+    const updatedBy = {
+      account_id: res.locals.user.id,
+      updateTime: new Date(),
+    };
+
+    await Product.updateOne(
+      { _id: req.params.id },
+      {
+        ...req.body,
+        $push: { updatedBy: updatedBy },
+      }
+    );
+
     req.flash("success", "Cập nhật sản phẩm thành công");
     res.redirect("/admin/products/edit/" + req.params.id);
   } catch (error) {

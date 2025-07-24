@@ -58,8 +58,14 @@ const productSchema = new mongoose.Schema(
     },
     deletedBy: {
       account_id: String,
-      deleteTime: Date
+      deleteTime: Date,
     },
+    updatedBy: [
+      {
+        account_id: String,
+        updateTime: Date,
+      },
+    ],
   },
   {
     timestamps: true, // Tự động tạo createdAt và updatedAt

@@ -64,6 +64,7 @@ block main
         th Hình ảnh
         th Tiêu đề
         th Giá 
+        th Người cập nhật 
         th Người tạo
         th Trạng thái
         th Hành động
@@ -83,6 +84,7 @@ block main
               )
           td #{item.title}
           td #{item.price}$
+          td #{item.userUpdated}
           td  
             if item.userCreate
               span #{item.userCreate}
