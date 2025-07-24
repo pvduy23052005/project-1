@@ -106,7 +106,16 @@ module.exports.changeMulti = async (req, res) => {
       break;
     case "delete":
       try {
-        await Product.updateMany({ _id: { $in: arrayId } }, { deleted: true });
+        await Product.updateMany(
+          { _id: { $in: arrayId } },
+          {
+            deleted: true,
+            deletedBy: {
+              account_id: res.locals.id,
+              deleteTime: new Date(),
+            },
+          }
+        );
         req.flash("success", "Xóa sản phẩm thành công");
       } catch (error) {
         console.log("Lỗi:", error);
@@ -125,7 +134,16 @@ module.exports.deleteProduct = async (req, res) => {
   const id = req.params.id;
 
   try {
-    await Product.updateOne({ _id: id }, { deleted: true });
+    await Product.updateOne(
+      { _id: id },
+      {
+        deleted: true,
+        deletedBy: {
+          account_id: res.locals.user.id,
+          deleteTime: new Date(),
+        },
+      }
+    );
     req.flash("success", "Xóa sản phẩm thành công");
   } catch (error) {
     console.log("Lỗi:", error);
