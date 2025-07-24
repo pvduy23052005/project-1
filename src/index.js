@@ -10,7 +10,9 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const flash = require("express-flash");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
+const moment = require("moment");
+require("moment/locale/vi"); // nạp ngôn ngữ tiếng Việt
 
 const port = process.env.PORT;
 const app = express();
@@ -24,9 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-
-app.use('/tinymce', express.static(path.join(__dirname,"..", 'node_modules', 'tinymce')));
-
+app.use(
+  "/tinymce",
+  express.static(path.join(__dirname, "..", "node_modules", "tinymce"))
+);
 
 app.use(
   session({
@@ -45,6 +48,7 @@ app.use((req, res, next) => {
 });
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment;
 
 database.connectDatabase(); // kết nối database
 

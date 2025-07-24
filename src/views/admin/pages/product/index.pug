@@ -4,6 +4,7 @@ include ../../mixins/formSearch.pug
 include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi.pug
 include ../../mixins/box-alert.pug
+include ../../mixins/moment.pug
 
 block main 
   +box-alert-warning(5000)
@@ -62,7 +63,8 @@ block main
         th STT
         th Hình ảnh
         th Tiêu đề
-        th Giá
+        th Giá 
+        th Người tạo
         th Trạng thái
         th Hành động
     tbody
@@ -81,6 +83,13 @@ block main
               )
           td #{item.title}
           td #{item.price}$
+          td  
+            if item.userCreate
+              span #{item.userCreate}
+            else
+              span Chưa chưa có người tạo 
+            +momentDate(item.createBy.create)
+
           td
             if item.status == 'active'
               a(href="#" class="badge text-bg-success"

@@ -9,9 +9,9 @@ const productSchema = new mongoose.Schema(
       trim: true, // tuy chỉnh khoảng trắng ở đầu và cuối
     },
     category: {
-      type : String , 
-      default : "" , 
-      trim : true  
+      type: String,
+      default: "",
+      trim: true,
     },
     slug: {
       type: String,
@@ -48,6 +48,13 @@ const productSchema = new mongoose.Schema(
     deleted: {
       type: Boolean,
       default: false,
+    },
+    createBy: {
+      account_id: String,
+      create: {
+        type: Date,
+        default: Date.now(),
+      },
     },
   },
   {

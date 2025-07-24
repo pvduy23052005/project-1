@@ -3,6 +3,7 @@ const listButtonStatusHelpers = require("../../helpers/listButtonStatus");
 const pagenationHelpers = require("../../helpers/pagination");
 const Category = require("../../models/category.model");
 const buildCategoryTree = require("../../helpers/buildCategoryTree.js");
+const Account = require("../../models/account.model.js");
 
 //[get] admin/products
 module.exports.index = async (req, res) => {
@@ -44,6 +45,18 @@ module.exports.index = async (req, res) => {
     .sort(sort)
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
+
+  for (const product of products) {
+    const user = await Account.findOne({
+      _id: product.createBy.account_id,
+    });
+
+    if (user) {
+      product.userCreate = user.fullName;
+    } else {
+      product.userCreate = "Chưa có người tạo ";
+    }
+  }
 
   res.render("admin/pages/product/index", {
     title: "Products",
@@ -159,8 +172,12 @@ module.exports.createProductPost = async (req, res) => {
       req.body.thumbnail = req.file.path;
     }
 
-    const product = new Product(req.body);
+    // luu thong tin boi ai
+    req.body.createBy = {
+      account_id: res.locals.user.id,
+    };
 
+    const product = new Product(req.body);
     await product.save();
 
     req.flash("success", "Thêm mới thành công");
@@ -183,7 +200,7 @@ module.exports.editProductGet = async (req, res) => {
     res.render("admin/pages/product/edit", {
       title: "Chỉnh sửa sản phẩm",
       product: editProduct,
-      categoryTree : categoryTree 
+      categoryTree: categoryTree,
     });
   } catch (error) {
     req.flash("error", "Không tìm thấy sản phẩm");
