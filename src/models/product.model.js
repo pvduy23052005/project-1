@@ -13,6 +13,10 @@ const productSchema = new mongoose.Schema(
       default: "",
       trim: true,
     },
+    featured : {
+      type : String , 
+      default : "1"
+    },
     slug: {
       type: String,
       slug: "title", // Tạo slug từ trường `title`

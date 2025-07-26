@@ -26,39 +26,49 @@ block main
             +select-tree(categories , "" , 1 )
 
         .form-group.mb-3
-          label(for="description") Mô tả
-          textarea(
-            name="description", 
-            style = "height: 100px; witdh : 100%",
-            class = "form-control textarea-mce" id="description")
+          label.mb-2(for="featured") Sản phẩm nổi bật
+            .box-check.d-flex
+              .form-check
+                input#featuredYes(type="radio" name="featured" value="1" checked)
+                label(for="featuredYes") Có
+              .form-check
+                input#featuredNo(type="radio" name="featured" value="0")
+                label(for="featuredNo") Không
 
-        .form-group.mb-3
-          label(for="price") Giá sản phẩm
-          input(type="number", 
-            class = "form-control" name="price" id="price", required, min="0" step="0.01" )
+      .form-group.mb-3
+        label(for="description") Mô tả
+        textarea(
+          name="description", 
+          style = "height: 100px; witdh : 100%",
+          class = "form-control textarea-mce" id="description")
 
-        .form-group.mb-3
-          label(for="discountPercentage") Giảm giá (%)
-          input(type="number", class = "form-control" name="discountPercentage" id="discountPercentage" min="0" max="100" step="0.01")
+      .form-group.mb-3
+        label(for="price") Giá sản phẩm
+        input(type="number", 
+          class = "form-control" name="price" id="price", required, min="0" step="0.01" )
 
-        .form-group.mb-3
-          label(for="stock") Số lượng tồn kho
-          input(type="number" ,class = "form-control" name="stock" id="stock" min="0")
+      .form-group.mb-3
+        label(for="discountPercentage") Giảm giá (%)
+        input(type="number", class = "form-control" name="discountPercentage" id="discountPercentage" min="0" max="100" step="0.01")
 
-        .form-group.mb-3
-          label(for="thumbnail") Ảnh đại diện
-          input(type="file",
-            class = "form-control" name="thumbnail" id="thumbnail" accept="image/*")
-          img(src="", id = "preview" alt="" style="max-width: 150px; margin-top: 10px;")
+      .form-group.mb-3
+        label(for="stock") Số lượng tồn kho
+        input(type="number" ,class = "form-control" name="stock" id="stock" min="0")
 
-        .form-group.mb-3
-          label(for="status") Trạng thái
-          select( class = "form-control" name="status" id="status")
-            option(value="active" selected) Hoạt động
-            option(value="inactive") Không hoạt động
+      .form-group.mb-3
+        label(for="thumbnail") Ảnh đại diện
+        input(type="file",
+          class = "form-control" name="thumbnail" id="thumbnail" accept="image/*")
+        img(src="", id = "preview" alt="" style="max-width: 150px; margin-top: 10px;")
 
-        .form-group.mb-4
-          label(for="position") Vị trí hiển thị
-          input(type="number", class = "form-control" name="position" id="position" min="0" placeholder="Tự động tăng" )
+      .form-group.mb-3
+        label(for="status") Trạng thái
+        select( class = "form-control" name="status" id="status")
+          option(value="active" selected) Hoạt động
+          option(value="inactive") Không hoạt động
 
-        button.btn.btn-success.text-align-end(type="submit") Tạo sản phẩm
+      .form-group.mb-4
+        label(for="position") Vị trí hiển thị
+        input(type="number", class = "form-control" name="position" id="position" min="0" placeholder="Tự động tăng" )
+
+      button.btn.btn-success.text-align-end(type="submit") Tạo sản phẩm

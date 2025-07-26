@@ -2,7 +2,7 @@ extends ../../layout/default.pug
 include ../../mixins/box-alert.pug
 
 block main
-  h1 Chi tiết Sản phẩm
+  h1.mt-5.text-center Chi tiết Sản phẩm
 
   .container 
     .card.mb-3.text-start
@@ -28,7 +28,7 @@ block main
           .col-md-6
             p 
               strong Mô tả: 
-              | #{product.description}
+              | !{product.description}
           .col-md-6
             p 
               strong Giảm giá: 

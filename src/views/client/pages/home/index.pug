@@ -1,4 +1,12 @@
-extends ../../layout/default 
+extends ../../layout/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/box-product.pug
 
 block main 
-  h1 Trang chu .
+
+  .container
+    .row
+      .col-12
+        +box-head("Sản phẩm nổi bật")
+
+    +box-product(products)

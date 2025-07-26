@@ -1,0 +1,15 @@
+mixin box-product(products)
+  .row
+    each item in products
+      .col-4.mb-3
+        a(href=`/products/${item.slug}`) 
+          .product-item
+            .inner-image
+              img(src=item.thumbnail, alt=item.name)
+              if item.featured
+                span Nổi bật
+            .inner-content
+              h3.inner-title #{item.title}
+              .inner-price-new #{item.oldPrice}$
+              .inner-price-old #{item.price}$
+              .inner-discount -#{item.discountPercentage}%

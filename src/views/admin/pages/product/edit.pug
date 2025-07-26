@@ -31,6 +31,16 @@ block main
             +select-tree(categoryTree, product.category  , 1)
 
         .form-group.mb-3
+          label.mb-2(for="featured") Sản phẩm nổi bật
+            .box-check.d-flex
+              .form-check
+                input#featuredYes(type="radio" name="featured" value="1" checked = (product.featured == "1" ? true : false))
+                label(for="featuredYes") Có
+              .form-check
+                input#featuredNo(type="radio" name="featured" value="0" checked = (product.featured == "0" ? true : false))
+                label(for="featuredNo") Không
+    
+        .form-group.mb-3
           label(for="description") Mô tả
           textarea(name="description", 
             style = "height: 100px; witdh : 100%",

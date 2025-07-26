@@ -1,5 +1,7 @@
 const Product = require("../../models/product.model");
+const newPriceProduct = require("../../helpers/client/newPriceProduct.js");
 
+// [get] /
 module.exports.index = async (req, res) => {
   // Tìm tất cả sản phẩm chưa bị xóa và có trạng thái "active"
   let find = {
@@ -7,45 +9,40 @@ module.exports.index = async (req, res) => {
     status: "active",
   };
 
-  const products = await Product.find(find)
-    .sort({ position: "desc", createdAt: -1 }) // Sắp xếp theo vị trí và ngày tạo
+  const products = await Product.find(find).sort({
+    position: "desc",
+    createdAt: -1,
+  }); // Sắp xếp theo vị trí và ngày tạo
 
-
-  let products1 = products.map((item) => {
-    let oldPrice = item.price - (item.price * item.discountPercentage) / 100;
-
-    item["oldPrice"] = oldPrice.toFixed(0); // Thêm trường oldPrice vào item
-    return item ;
-  });
+  const newProduct = newPriceProduct(products);
 
   res.render("client/pages/product/index", {
     title: "Product",
-    products: products1,
+    products: newProduct,
   });
 };
 
+// [get] /products/detaul/:id
 module.exports.detail = async (req, res) => {
-  const slug = req.params.slug ; 
+  const slug = req.params.slug;
 
-  try{
-    const find = { 
-      status : "active" , 
-      slug : slug 
-    }
+  try {
+    const find = {
+      status: "active",
+      slug: slug,
+    };
 
     const product = await Product.findOne(find);
 
-    if(!product){
-      req.flash("warning","Không có sản phẩm") ;
+    if (!product) {
+      req.flash("warning", "Không có sản phẩm");
       res.redirect("/products");
-      return ; 
+      return;
     }
 
-    res.render("client/pages/product/detail.pug" , {
-      title : "Chi tiết sản phẩm" , 
-      product : product
-    })
-  }catch{
-
-  }
-}
+    res.render("client/pages/product/detail.pug", {
+      title: "Chi tiết sản phẩm",
+      product: product,
+    });
+  } catch {}
+};
