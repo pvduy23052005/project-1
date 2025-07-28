@@ -1,5 +1,6 @@
 const Product = require("../../models/product.model");
 const newPriceProduct = require("../../helpers/client/newPriceProduct.js");
+const Category = require("../../models/category.model.js");
 
 // [get] /
 module.exports.index = async (req, res) => {
@@ -22,7 +23,7 @@ module.exports.index = async (req, res) => {
   });
 };
 
-// [get] /products/detaul/:id
+// [get] /products/detail/:slug
 module.exports.detail = async (req, res) => {
   const slug = req.params.slug;
 
@@ -45,4 +46,23 @@ module.exports.detail = async (req, res) => {
       product: product,
     });
   } catch {}
+};
+
+// [get] /products/:slugCategory
+module.exports.category = async (req, res) => {
+  const slugCategory = req.params.slugCategory;
+  const idCategory = await Category.findOne({
+    slug: slugCategory,
+  });
+  let find = {
+    category: idCategory.id,
+    deleted: false,
+    status: "active",
+  };
+  const products = await Product.find(find);
+  const newProduct = newPriceProduct(products);
+  res.render("client/pages/product/index", {
+    title: "Product",
+    products: newProduct,
+  });
 };
