@@ -45,3 +45,24 @@ block main
                 p 
                   strong Trạng thái: 
                   | #{product.status}
+
+            .row
+              .col-md-6
+                p 
+                  strong Vị trí: 
+                  | #{product.position}
+              .col-md-6
+                p 
+                  strong Ngày cập nhật: 
+                  | #{product.updatedAt.toLocaleString()}
+          .col-md-6
+            .row
+              .col-md-12
+                p 
+                  strong Ảnh đại diện:
+                if product.thumbnail
+                  img(src=product.thumbnail, alt="thumbnail" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px;")
+                else
+            
+
+
