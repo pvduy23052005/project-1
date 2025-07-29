@@ -63,6 +63,21 @@ block main
                 if product.thumbnail
                   img(src=product.thumbnail, alt="thumbnail" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px;")
                 else
-            
+                  p Không có ảnh
+            .row 
+              .col-md-12 
+                form(
+                  action=`/cart/add/${product.id}`
+                  method = "POST"
+                  )
+                  input(
+                    class = "form-control mb-2"
+                    type="number"
+                    min = "1"
+                    max = product.stock 
+                    name = "quantity"
+                    value = 1
+                    ) 
+                  button(type = "submit" class = "btn-add-cart") add to cart            
 
 
