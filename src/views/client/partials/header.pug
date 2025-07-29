@@ -11,7 +11,7 @@ header
           .col-md-6
             form(action="/search", method="get"
               )
-              .input-grop.d-flex
+              .input-group.d-flex
                 input(
                   type="text"
                   class = "form-control" 
@@ -33,5 +33,10 @@ header
                           a(href=`/products/${category.slug}`) #{category.title}
                     else
                       li Không có danh mục nào
+          .col-1
+            .box-cart 
+              a(href="/cart")
+                <i class="fa-solid fa-cart-shopping icon-cart"></i>
+                  span(class = "quantity-product") #{(quantityProduct ? quantityProduct : 0)}  
 
 
