@@ -1,0 +1,9 @@
+extends ../../layout/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/box-product.pug
+
+block main 
+  +box-head(`Kết của tìm kiêm: ${title}`)
+
+  .container 
+    +box-product(products)
