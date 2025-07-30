@@ -75,3 +75,26 @@ module.exports.index = async (req, res) => {
     totalPrice: totalPrice,
   });
 };
+
+// [get] /cart/delete/:id
+module.exports.delete = async (req, res) => {
+  const cartId = req.cookies.cartId;
+  const productId = req.params.id;
+
+  try {
+    await Cart.updateOne(
+      {
+        _id: cartId,
+      },
+      {
+        $pull: {
+          products: { product_id: productId },
+        },
+      }
+    );
+    req.flash("success", "Thanh cong !");
+  } catch {
+    req.flash("error", "That bai !");
+  }
+  res.redirect("/cart");
+};

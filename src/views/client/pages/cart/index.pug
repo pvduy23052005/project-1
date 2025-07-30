@@ -37,7 +37,7 @@ block main
               )
             td #{item.price * item.quantity}$
             td
-              form(action=`/cart/delete/${item._id}`, method="POST")
+              form(action=`/cart/delete/${item._id}`, method="GET")
                 button.btn.btn-danger(type="submit") Xoá
 
 
