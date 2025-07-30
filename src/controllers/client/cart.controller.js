@@ -98,3 +98,27 @@ module.exports.delete = async (req, res) => {
   }
   res.redirect("/cart");
 };
+
+// [get] /cart/update/:id/:quantity
+module.exports.update = async (req, res) => {
+  const cartId = req.cookies.cartId;
+  const quantity = parseInt(req.params.quantity);
+  const productId = req.params.id;
+
+  if (quantity < 1) return res.redirect("/cart");
+
+  await Cart.updateOne(
+    {
+      _id: cartId,
+      "products.product_id": productId,
+    },
+    {
+      $set: {
+        "products.$.quantity": quantity,
+      },
+    }
+  );
+
+  req.flash("success", "Cập nhật số lượng thành công");
+  res.redirect("/cart");
+};

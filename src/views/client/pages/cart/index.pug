@@ -33,7 +33,8 @@ block main
                 type="number", 
                 value=item.quantity, 
                 min="1", 
-                data-product-id=item._id
+                data-product-id=item.id
+                name = "quantity" 
               )
             td #{item.price * item.quantity}$
             td
@@ -44,3 +45,4 @@ block main
     div.d-flex.justify-content-between.align-items-center.mt-3.mb-5
       h4 Tổng đơn hàng: #{totalPrice}$
       a.btn.btn-success(href="/checkout") THANH TOÁN
+  script(src="/client/js/cart.js") 
