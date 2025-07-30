@@ -15,7 +15,6 @@ module.exports.cartMiddleware = async (req, res, next) => {
     });
     let count = 0;
     for (const product of cart.products) {
-      console.log(product);
       count += product.quantity;
     }
     res.locals.quantityProduct = count;

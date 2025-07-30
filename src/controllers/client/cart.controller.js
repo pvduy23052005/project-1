@@ -1,4 +1,5 @@
 const Cart = require("../../models/cart.model");
+const Product = require("../../models/product.model");
 
 // [get] /cart/add/:id
 module.exports.addPost = async (req, res) => {
@@ -9,17 +10,14 @@ module.exports.addPost = async (req, res) => {
     product_id: productId,
     quantity: quantity,
   };
-
   const idCart = req.cookies.cartId;
   const cart = await Cart.findOne({
     _id: idCart,
   });
-
   // find product da ton tai trong gio hang .
   const existingProduct = cart.products.find(
     (item) => item.product_id.toString() === productId
   );
-
   if (existingProduct) {
     existingProduct.quantity += quantity;
     // Cố gắng cập nhật số lượng nếu sản phẩm đã tồn tại
@@ -44,5 +42,36 @@ module.exports.addPost = async (req, res) => {
       }
     );
   }
+
   res.send("ok");
+};
+
+// [get] /cart
+module.exports.index = async (req, res) => {
+  const cartId = req.cookies.cartId;
+
+  const cart = await Cart.findOne({
+    _id: cartId,
+  });
+  let products = [];
+  let totalPrice = 0;
+  for (const item of cart.products) {
+    const product = await Product.findOne({
+      _id: item.product_id,
+    });
+    let oldPrice =
+      product.price - (product.price * product.discountPercentage) / 100;
+    product["oldPrice"] = oldPrice.toFixed(0);
+    totalPrice += parseInt(product.oldPrice * item.quantity);
+
+    product.quantity = item.quantity;
+
+    products.push(product);
+  }
+
+  res.render("client/pages/cart/index", {
+    title: "Cart",
+    products: products,
+    totalPrice: totalPrice,
+  });
 };
