@@ -27,6 +27,35 @@ module.exports.registerPost = async (req, res) => {
     }
   } catch (error) {
     req.flash("error", "Register not successful !");
-    req.redirect("/uder/login");
+    res.redirect("/uder/login");
+  }
+};
+
+// [get] /user/login
+module.exports.login = async (req, res) => {
+  res.render("client/pages/login", {
+    title: "Login",
+  });
+};
+
+// [post] /user/login
+module.exports.loginPost = async (req, res) => {
+  const userInfo = req.body;
+
+  const user = await User.findOne({
+    email: userInfo.email,
+    deleted: false,
+  });
+  if (user) {
+    if (user.password !== md5(userInfo.password)) {
+      req.flash("error", "Incorrect password!");
+      return;
+    }
+    res.cookie("tokenUser", user.tokenUser);
+    req.flash("success", "Thanh cong!");
+    res.redirect("/");
+  } else {
+    req.flash("error", "Email does not exist.");
+    res.redirect("/user/login");
   }
 };

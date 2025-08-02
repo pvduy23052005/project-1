@@ -6,9 +6,14 @@ const cartMiddleware = require("../../middlewares/client/cart.middleware.js");
 const cartRoute = require("./cart.route.js");
 const checkoutRoute = require("./checkout.route.js");
 const userRoute = require("./user.route.js");
+const userMiddleware = require("../../middlewares/client/user.middleware.js");
 
 module.exports = (app) => {
-  app.use(categoryMiddleware.categoryMiddleware, cartMiddleware.cartMiddleware);
+  app.use(
+    categoryMiddleware.categoryMiddleware,
+    cartMiddleware.cartMiddleware,
+    userMiddleware.userMiddleware
+  );
 
   app.use("/", homeRoute);
 
