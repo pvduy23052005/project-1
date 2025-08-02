@@ -37,7 +37,6 @@ module.exports.checkoutPost = async (req, res) => {
   const cartId = req.cookies.cartId;
   const userInfo = req.body;
 
-
   try {
     const cart = await Cart.findOne({
       _id: cartId,
@@ -52,6 +51,7 @@ module.exports.checkoutPost = async (req, res) => {
         .select("price discountPercentage")
         .lean();
       product.quantity = item.quantity;
+      product.product_id = item.product_id;
       products.push(product);
     }
     const orderInfo = {
@@ -75,13 +75,17 @@ module.exports.checkoutPost = async (req, res) => {
     // req.flash("success", "successfull payment");
     res.redirect(`/checkout/success/${order.id}`);
   } catch (error) {
-    console.error("❌ Lỗi khi xử lý đơn hàng:", error);
+    console.error("Lỗi khi xử lý đơn hàng:", error);
     res.redirect("/cart");
   }
 };
 
 // [get] /checkout/success/:orderId
 module.exports.checkoutSuccess = async (req, res) => {
+  const orderId = req.params.orderId;
+
+  const order = await Order({ _id: orderId });
+
   res.render("client/pages/checkout/success", {
     title: "Successful order",
   });
