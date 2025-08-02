@@ -1,0 +1,30 @@
+extends ../../layout/default.pug 
+include ../../mixins/box-alert.pug
+include ../../mixins/box-head.pug
+
+block main 
+
+  +box-alert-success(5000)
+  +box-alert-error(5000)
+
+  +box-head("Sign up")
+
+  .container 
+    .row.justify-content-center 
+      .col-8 
+        .card.p-4
+          form(action="/user/register" method="POST")
+            .form-group.mb-4
+              label(for="fullName") Họ và tên
+              input#fullName.form-control(type="text" name="fullName", required)
+
+            .form-group.mb-4
+              label(for="email") Email
+              input#email.form-control(type="email" name="email", required)
+
+            .form-group.mb-4
+              label(for="password") Mật khẩu
+              input#password.form-control(type="password" name="password", required)
+
+            .form-group.mb-4
+              button.btn.btn-success(type="submit") Đăng ký
