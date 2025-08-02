@@ -27,7 +27,7 @@ block main
               img(src=item.thumbnail, alt=item.title, width="60")
             td 
               a(href=`/products/detail/${item.slug}`) #{item.title}
-            td #{item.price}$ 
+            td #{item.oldPrice}$ 
             td
               input.form-control(
                 type="number", 
@@ -36,7 +36,7 @@ block main
                 data-product-id=item.id
                 name = "quantity" 
               )
-            td #{item.price * item.quantity}$
+            td #{item.oldPrice * item.quantity}$
             td
               form(action=`/cart/delete/${item._id}`, method="GET")
                 button.btn.btn-danger(type="submit") Xoá
