@@ -29,6 +29,7 @@
     "morgan": "^1.10.0",
     "multer": "^2.0.1",
     "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^7.0.5",
     "pug": "^3.0.3",
     "serverless-http": "^3.2.0",
     "tinymce": "^7.9.1",

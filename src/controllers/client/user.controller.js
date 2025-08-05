@@ -2,6 +2,7 @@ const User = require("../../models/user.model");
 const md5 = require("md5");
 const random = require("../../helpers/random");
 const ForgetPassword = require("../../models/forget-password.model");
+const sendMailHelper = require("../../helpers/client/sendEmail");
 
 // [post] /user/register
 module.exports.register = (req, res) => {
@@ -93,6 +94,14 @@ module.exports.forgetPasswordPost = async (req, res) => {
   };
   const forgetPassword = new ForgetPassword(objectForget);
   await forgetPassword.save();
+
+  // gui mail .
+  const subject = "Sac thuc OTP ";
+  const html = `
+    Ma OTP : <b> ${otp} </b>
+  `;
+  
+  sendMailHelper.sendMail(email, subject, html);
   res.redirect(`/user/password/otp?email=${email}`);
 };
 

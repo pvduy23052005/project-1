@@ -5,10 +5,10 @@ const forgetPasswordSchema = new mongoose.Schema(
     email: String,
     otp: String,
     expireAt: {
-      type : Date , 
-      expires : 180, // don vi (s)
-      default : Date.now
-    }
+      type: Date,
+      default: () => new Date(Date.now() + 180 * 1000), 
+      expires: 0, 
+    },
   },
   {
     timestamps: true,
