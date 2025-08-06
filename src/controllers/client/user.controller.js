@@ -3,15 +3,16 @@ const md5 = require("md5");
 const random = require("../../helpers/random");
 const ForgetPassword = require("../../models/forget-password.model");
 const sendMailHelper = require("../../helpers/client/sendEmail");
+const Cart = require("../../models/cart.model");
 
-// [post] /user/register
+// [get] /user/register
 module.exports.register = (req, res) => {
   res.render("client/pages/user/register", {
     title: "Sign up",
   });
 };
 
-// [get] /user/register
+// [post] /user/register
 module.exports.registerPost = async (req, res) => {
   try {
     const userInfo = req.body;
@@ -30,7 +31,7 @@ module.exports.registerPost = async (req, res) => {
     }
   } catch (error) {
     req.flash("error", "Register not successful !");
-    res.redirect("/uder/login");
+    res.redirect("/user/login");
   }
 };
 
@@ -44,28 +45,51 @@ module.exports.login = async (req, res) => {
 // [post] /user/login
 module.exports.loginPost = async (req, res) => {
   const userInfo = req.body;
-
   const user = await User.findOne({
     email: userInfo.email,
     deleted: false,
   });
-  if (user) {
-    if (user.password != md5(userInfo.password)) {
-      req.flash("error", "Incorrect password!");
-      return;
-    }
-    res.cookie("tokenUser", user.tokenUser);
-    req.flash("success", "Thanh cong!");
-    res.redirect("/");
-  } else {
+
+  if (!user) {
     req.flash("error", "Email does not exist.");
+    res.locals.userLogin = userInfo.email;
     res.redirect("/user/login");
+    return;
   }
+
+  if (user.password !== md5(userInfo.password)) {
+    req.flash("error", "Incorrect password!");
+    res.redirect("/user/login");
+    return;
+  }
+
+  const cart = await Cart.findOne({
+    user_id: user.id,
+  });
+
+  // new gio hang chua co .
+  if (cart) {
+    res.cookie("cartId", cart.id);
+  } else {
+    await Cart.updateOne(
+      {
+        _id: req.cookies.cartId,
+      },
+      {
+        user_id: user.id,
+      }
+    );
+  }
+
+  res.cookie("tokenUser", user.tokenUser);
+  req.flash("success", "Thanh cong!");
+  res.redirect("/");
 };
 
 // [post] /user/logout
 module.exports.logout = async (req, res) => {
   res.clearCookie("tokenUser");
+  res.clearCookie("cartId");
   res.redirect("/");
 };
 
@@ -100,7 +124,7 @@ module.exports.forgetPasswordPost = async (req, res) => {
   const html = `
     Ma OTP : <b> ${otp} </b>
   `;
-  
+
   sendMailHelper.sendMail(email, subject, html);
   res.redirect(`/user/password/otp?email=${email}`);
 };
@@ -114,7 +138,7 @@ module.exports.otp = async (req, res) => {
   });
 };
 
-// [get] /user/password/otp.
+// [post] /user/password/otp.
 module.exports.otpPost = async (req, res) => {
   const email = req.body.email;
   const otp = req.body.otp;
