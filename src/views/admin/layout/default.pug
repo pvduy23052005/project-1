@@ -11,7 +11,7 @@ html(lang="en")
 
   body
 
-    if role.permissions[0] 
+    if role && role.permissions && role.permissions.length > 0
       include ../partials/header.pug
 
       .body 
