@@ -1,0 +1,30 @@
+extends ../../layout/default.pug
+include ../../mixins/box-head.pug
+
+
+block main 
+  +box-head("chat") 
+
+  .container 
+    .row 
+      .chat 
+        .inner-head
+          
+        .inner-body 
+          .inner-incoming
+              .inner-name Em Yêu
+              .inner-content
+                | A ơi sang nhà em nha, nhà em không có ai ở nhà cả
+          .inner-outgoing
+            .inner-content
+              | Thế à? Ok em iu
+
+          .inner-incoming
+            .inner-name Em Yêu
+            .inner-content
+              | Nhanh nha nhanh nha
+        .inner-foot
+            form.inner-form(action="")
+              input(type="text" placeholder="Nhập nội dung..." name="content")
+              button
+                i.fa-solid.fa-paper-plane

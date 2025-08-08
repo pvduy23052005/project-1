@@ -233,7 +233,7 @@ body .btn-add-cart {
   background-color: #00ff00;
   color: #fff;
   padding: 10px 20px;
-  font-size : 18px ; 
+  font-size: 18px;
   font-weight: 500;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -242,9 +242,8 @@ body .btn-add-cart {
   -o-border-radius: 5px;
 }
 
-
 /* // css cart */
-body .box-cart{
+body .box-cart {
   width: 100%;
   height: 100%;
   display: flex;
@@ -252,21 +251,117 @@ body .box-cart{
   align-items: center;
 }
 
-body .box-cart a{
+body .box-cart a {
   position: relative;
-  color : #fff ; 
-  font-size : 25px ;
+  color: #fff;
+  font-size: 25px;
 }
 
-body .box-cart .icon-cart{
+body .box-cart .icon-cart {
   position: relative;
 }
 
-body .box-cart .quantity-product{
+body .box-cart .quantity-product {
   position: absolute;
-  top : -15px ; 
-  right : -15px ; 
-  font-size : 25px; 
-  color : orange ;
+  top: -15px;
+  right: -15px;
+  font-size: 25px;
+  color: orange;
 }
 /* end  css cart */
+
+/* Tổng thể khung chat */
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8f9fa;
+}
+
+/* Header */
+.inner-head {
+  background: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Body chứa tin nhắn */
+.inner-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* Tin nhắn nhận */
+.inner-incoming {
+  margin-bottom: 12px;
+}
+.inner-incoming .inner-name {
+  font-size: 12px;
+  color: #555;
+}
+.inner-incoming .inner-content {
+  display: inline-block;
+  background: #e9ecef;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 70%;
+}
+
+/* Tin nhắn gửi */
+.inner-outgoing {
+  text-align: right;
+  margin-bottom: 12px;
+}
+.inner-outgoing .inner-content {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 70%;
+}
+
+/* Footer */
+.inner-foot {
+  border-top: 1px solid #ddd;
+  padding: 8px;
+  background: #fff;
+}
+
+.inner-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inner-form input[type="text"] {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+.inner-form button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.inner-form button:hover {
+  background: #0056b3;
+}
+
+.inner-form i {
+  font-size: 16px;
+}

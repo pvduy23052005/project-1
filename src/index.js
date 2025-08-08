@@ -13,9 +13,13 @@ const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 const moment = require("moment");
 require("moment/locale/vi"); // nạp ngôn ngữ tiếng Việt
+const http = require("http");
+const { Server } = require("socket.io");
 
 const port = process.env.PORT;
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "./views"));
@@ -47,6 +51,10 @@ app.use((req, res, next) => {
   next();
 });
 
+io.on("connection", (socket) => {
+  console.log("Client connected:", socket.id);
+});
+
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.locals.moment = moment;
 
@@ -56,6 +64,6 @@ database.connectDatabase(); // kết nối database
 clientRoute(app);
 adminRoute(app);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Local server is running on http://localhost:${port}`);
 });
