@@ -349,6 +349,16 @@ body .box-cart .quantity-product {
   outline: none;
 }
 
+.inner-form .button-icon {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
 .inner-form button {
   background: #007bff;
   color: #fff;
@@ -364,4 +374,20 @@ body .box-cart .quantity-product {
 
 .inner-form i {
   font-size: 16px;
+}
+
+/* show box icon */
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  -webkit-transition: opacity 0.3s ease;
+  -moz-transition: opacity 0.3s ease;
+  -ms-transition: opacity 0.3s ease;
+  -o-transition: opacity 0.3s ease;
+}
+
+.tooltip.shown {
+  visibility: visible;
+  opacity: 1;
 }

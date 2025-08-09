@@ -6,8 +6,10 @@ module.exports.index = async (req, res) => {
   const userId = res.locals.user.id;
   const fullName = res.locals.user.fullName;
 
+
   _io.once("connection", (socket) => {
-    socket.once("CLIENT_SEND", async (message) => {
+
+    socket.on("CLIENT_SEND", async (message) => {
       // luu vao database .
       const record = new Chat({
         user_id: userId,
@@ -21,6 +23,7 @@ module.exports.index = async (req, res) => {
       });
     });
   });
+
   const listChat = await Chat.find({
     deleted: false,
   });
@@ -30,7 +33,7 @@ module.exports.index = async (req, res) => {
     }).select("fullName");
     chat.infoUser = user;
   }
-  
+
   res.render("client/pages/chat/index", {
     title: "Chat",
     chats: listChat,
