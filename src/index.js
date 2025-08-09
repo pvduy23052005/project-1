@@ -51,12 +51,9 @@ app.use((req, res, next) => {
   next();
 });
 
-io.on("connection", (socket) => {
-  console.log("Client connected:", socket.id);
-});
-
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.locals.moment = moment;
+global._io = io;
 
 database.connectDatabase(); // kết nối database
 
