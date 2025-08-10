@@ -65,6 +65,10 @@ if (emojiPicKer) {
     );
     const icon = e.detail.unicode;
     input.value += icon;
+    // tin nhan dai qua tu focus o duoi 
+    const end = input.value.length;
+    input.setSelectionRange(end, end);
+    input.focus();
   });
 }
 
