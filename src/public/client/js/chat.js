@@ -17,6 +17,8 @@ if (formChat) {
 socket.on("SERVER_SEND", (data) => {
   const bodyChat = document.querySelector(".chat .inner-body");
   const myId = document.querySelector("[my-id]").getAttribute("my-id");
+  const listBoxTyping = document.querySelector(".chat .inner-list-typing");
+
   if (bodyChat) {
     const div = document.createElement("div");
     if (myId === data.user_id) {
@@ -31,7 +33,7 @@ socket.on("SERVER_SEND", (data) => {
           <div class="inner-content">${data.content}</div>
     `;
     }
-    bodyChat.appendChild(div);
+    bodyChat.insertBefore(div, listBoxTyping);
     bodyChat.scrollTop = bodyChat.scrollHeight; // Scroll to the bottom
   } else {
     console.error("Chat body not found");
@@ -63,5 +65,40 @@ if (emojiPicKer) {
     );
     const icon = e.detail.unicode;
     input.value += icon;
+  });
+}
+
+// typing .
+const input = document.querySelector(".chat .inner-form input[name='content']");
+if (input) {
+  input.addEventListener("keyup", (e) => {
+    socket.emit("CLIENT_TYPING", "show");
+  });
+}
+
+// SERVER_SEND_TYPING
+const listBoxTyping = document.querySelector(".chat .inner-list-typing");
+if (listBoxTyping) {
+  socket.on("SERVER_SEND_TYPING", (data) => {
+    const existing = listBoxTyping.querySelector(`[user-id="${data.user_id}"]`);
+    console.log(existing);
+    if (!existing) {
+      const div = document.createElement("div");
+      div.classList.add("box-typing");
+      div.setAttribute("user-id", data.user_id);
+      div.innerHTML = `
+        <div class="inner-name">${data.fullName}</div>
+        <div class="inner-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      `;
+      listBoxTyping.appendChild(div);
+      setTimeout(() => {
+        listBoxTyping.removeChild(div);
+      }, 3000);
+      bodyChat.scrollTop = bodyChat.scrollHeight;
+    }
   });
 }

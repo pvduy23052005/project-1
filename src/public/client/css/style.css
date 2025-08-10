@@ -391,3 +391,58 @@ body .box-cart .quantity-product {
   visibility: visible;
   opacity: 1;
 }
+
+/* Typing */
+.inner-list-typing {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.box-typing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: sans-serif;
+}
+
+.inner-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.inner-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.inner-dots span {
+  width: 6px;
+  height: 6px;
+  background-color: #333;
+  border-radius: 50%;
+  animation: blink 1.4s infinite ease-in-out;
+}
+
+.inner-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+.inner-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.inner-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -9,7 +9,6 @@ block main
     .row 
       .chat(my-id = user.id )
         .inner-head
-
         .inner-body 
           each chat in chats 
             if chat.user_id === user.id 
@@ -21,6 +20,8 @@ block main
                 .inner-name #{chat.infoUser.fullName}
                 .inner-content
                   | #{chat.content}
+
+          .inner-list-typing
 
         .inner-foot
           form.inner-form(action="")
