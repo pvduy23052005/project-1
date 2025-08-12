@@ -18,10 +18,6 @@
   height: 100%;
   object-fit: contain;
   border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
 }
 
 .header .inner-menu {
@@ -101,10 +97,6 @@
   font-size: 15px;
   font-weight: 600;
   border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
 }
 
 .inner-image img {
@@ -112,10 +104,6 @@
   height: 100%;
   object-fit: contain;
   border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
 }
 
 .inner-content {
@@ -202,10 +190,6 @@
   margin: 0;
   right: 10px;
   border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
   border: 1px solid #fff;
 }
 
@@ -318,7 +302,12 @@ body .box-cart .quantity-product {
 .inner-outgoing {
   text-align: right;
   margin-bottom: 12px;
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-end; /* Đẩy nội dung sang phải */
+  align-items: flex-end; /* Căn chỉnh nội dung và ảnh về phía dưới */
 }
+
 .inner-outgoing .inner-content {
   display: inline-block;
   background: #007bff;
@@ -349,6 +338,16 @@ body .box-cart .quantity-product {
   outline: none;
 }
 
+.inner-form .upload-images {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
 .inner-form .button-icon {
   background: #007bff;
   color: #fff;
@@ -374,6 +373,55 @@ body .box-cart .quantity-product {
 
 .inner-form i {
   font-size: 16px;
+}
+
+.chat .inner-images-preview .label-container {
+  display: none;
+}
+
+.chat .inner-images-preview .input-container {
+  display: none;
+}
+
+.chat .inner-images-preview .image-preview {
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+
+.chat .inner-images-preview .image-preview .image-preview-item {
+  width: 90px;
+  object-fit: contain;
+}
+
+.chat .inner-body .inner-outgoing .inner-images {
+  text-align: right;
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid #333;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  background-color: #007bff;
+  padding: 10px;
+}
+
+.chat .inner-body .inner-images img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 /* show box icon */

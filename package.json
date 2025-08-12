@@ -20,6 +20,7 @@
     "express": "^5.1.0",
     "express-flash": "^0.0.2",
     "express-session": "^1.18.1",
+    "file-upload-with-preview": "^6.1.2",
     "json-server": "^1.0.0-beta.3",
     "md5": "^2.3.0",
     "method-override": "^3.0.0",
