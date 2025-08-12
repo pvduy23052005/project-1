@@ -1,5 +1,6 @@
 import * as Popper from "https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js";
 import { FileUploadWithPreview } from "https://unpkg.com/file-upload-with-preview/dist/index.js";
+// import { Viewer } from "viewerjs";
 
 // Initialize file upload preview
 const upload = new FileUploadWithPreview("upload-images", {
@@ -79,7 +80,9 @@ socket.on("SERVER_SEND", (data) => {
       ${htmlContent}
       ${htmlImages}
     `;
+
     bodyChat.insertBefore(div, listBoxTyping);
+    const gallery = new Viewer(div);
     bodyChat.scrollTop = bodyChat.scrollHeight; // Scroll to the bottom
   } else {
     console.error("Chat body not found");
@@ -150,4 +153,11 @@ if (listBoxTyping) {
       bodyChat.scrollTop = bodyChat.scrollHeight;
     }
   });
+}
+
+//  config viewer for image full screen .
+const bodyViewer = document.querySelector(".chat .inner-body");
+console.log(bodyViewer);
+if (bodyViewer) {
+  const gallery = new Viewer(bodyViewer);
 }

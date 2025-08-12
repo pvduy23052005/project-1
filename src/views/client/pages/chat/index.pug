@@ -9,7 +9,7 @@ block main
     .row 
       .chat(my-id = user.id)
         .inner-head
-        .inner-body 
+        .inner-body( id="images" )
           each chat in chats 
             div(class = (chat.user_id == user.id ? "inner-outgoing" : "inner-incoming"))
               if chat.user_id != user.id 
