@@ -127,17 +127,16 @@
 }
 
 /* Show Alert */
-
 [show-alert] {
-  position: fixed; /* Giữ vị trí cố định trên màn hình */
-  top: 70px; /* Cách mép trên 70px */
-  right: 15px; /* Cách mép phải 15px */
-  z-index: 9999; /* Đảm bảo nó luôn nằm trên cùng */
+  position: fixed; 
+  top: 70px; 
+  right: 15px; 
+  z-index: 9999; 
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  opacity: 1; /* Mặc định là hiện, sẽ dùng JS để thêm class ẩn */
-  transition: opacity 0.3s ease; /* Thêm transition cho opacity nếu muốn mờ dần */
+  opacity: 1; 
+  transition: opacity 0.3s ease; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,13 +151,13 @@
 /* Định nghĩa keyframes cho hiệu ứng ẩn */
 @keyframes alert-hidden {
   from {
-    right: 15px; /* Bắt đầu từ vị trí hiện tại (15px từ phải) */
-    opacity: 1; /* Mặc định là hiện */
+    right: 15px; 
+    opacity: 1; 
   }
   to {
-    right: -100%; /* Dịch chuyển ra ngoài màn hình về phía bên phải */
-    opacity: 0; /* Mờ dần */
-    display: none; /* Cuối cùng ẩn hoàn toàn phần tử */
+    right: -100%;
+    opacity: 0; 
+    display: none; 
   }
 }
 
@@ -493,4 +492,41 @@ body .box-cart .quantity-product {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* list-user */
+
+.box-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #333;
+  padding: 8px;
+}
+
+.box-user .inner-avatar {
+  width: 40%;
+  height: auto;
+}
+
+.box-user .inner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.box-user .inner-name {
+  font-size: 20px;
+}
+
+.box-user [btn-cancel-friend] {
+  display: none;
+}
+
+.box-user.add [btn-add-friend] {
+  display: none;
+}
+
+.box-user.add [btn-cancel-friend] {
+  display: inline-block;
 }
