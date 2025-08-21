@@ -157,7 +157,6 @@ if (listBoxTyping) {
 
 //  config viewer for image full screen .
 const bodyViewer = document.querySelector(".chat .inner-body");
-console.log(bodyViewer);
 if (bodyViewer) {
   const gallery = new Viewer(bodyViewer);
 }
