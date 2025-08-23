@@ -3,7 +3,8 @@ const User = require("../../models/user.model");
 module.exports = (res) => {
   const myId = res.locals.user.id;
 
-  _io.on("connection", (socket) => {
+  _io.once("connection", (socket) => {
+    // add friend .
     socket.on("ADD_FRIEND", async (userId) => {
       try {
         // them id cua A vao acceptFriends cuar B
@@ -22,6 +23,28 @@ module.exports = (res) => {
           },
           {
             $addToSet: { friendRequests: userId },
+          }
+        );
+      } catch (error) {}
+    });
+
+    // cancel friend .
+    socket.on("CANCEL_FRIEND", async (userId) => {
+      try {
+        await User.updateOne(
+          {
+            _id: myId,
+          },
+          {
+            $pull: { friendRequests: userId },
+          }
+        );
+        await User.updateOne(
+          {
+            _id: userId,
+          },
+          {
+            $pull: { friendAccepts: myId },
           }
         );
       } catch (error) {}

@@ -4,8 +4,8 @@ include ../../mixins/box-head.pug
 
 block main 
   +box-head("List-users") 
-
   .container
+    include ../../partials/list-btn-user.pug 
     .row
       each user in users
         .col-6
