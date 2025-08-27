@@ -49,5 +49,29 @@ module.exports = (res) => {
         );
       } catch (error) {}
     });
+
+    // refuse friend .
+    socket.on("REFUSE_FRIEND", async (userId) => {
+      try {
+        await User.updateOne(
+          {
+            _id: userId,
+          },
+          {
+            $pull: { friendRequests: myId },
+          }
+        );
+
+        await User.updateOne(
+          {
+            _id: myId,
+          },
+          {
+            $pull: { friendAccepts: userId },
+          }
+        );
+      } catch (error) {
+      }
+    });
   });
 };

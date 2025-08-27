@@ -23,3 +23,16 @@ if (listBtnCancelFriend) {
     });
   });
 }
+
+// refuse friend  :
+const listBtnRefuseFriend = document.querySelectorAll("[btn-refuse-friend]");
+if (listBtnRefuseFriend) {
+  listBtnRefuseFriend.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const userId = button.getAttribute("btn-refuse-friend");
+      button.closest(".box-user").classList.add("refuse");
+      console.log(userId);
+      socket.emit("REFUSE_FRIEND", userId);
+    });
+  });
+}

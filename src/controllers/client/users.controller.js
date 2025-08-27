@@ -50,3 +50,25 @@ module.exports.request = async (req, res) => {
     users: users,
   });
 };
+
+// [get] users/accept .
+module.exports.accept = async (req, res) => {
+  const userId = res.locals.user.id;
+
+  const user = await User.findOne({
+    _id: userId,
+  });
+  userSocket(res);
+  const friendAccepts = user.friendAccepts;
+  
+  const users = await User.find({
+    $and: [{ _id: { $ne: userId } }, { _id: { $in: friendAccepts } }],
+    status: "active",
+    deleted: false,
+  }).select("fullName avatar ");
+
+  res.render("client/pages/users/accept", {
+    title: "Accept",
+    users: users,
+  });
+};

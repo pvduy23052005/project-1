@@ -128,15 +128,15 @@
 
 /* Show Alert */
 [show-alert] {
-  position: fixed; 
-  top: 70px; 
-  right: 15px; 
-  z-index: 9999; 
+  position: fixed;
+  top: 70px;
+  right: 15px;
+  z-index: 9999;
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  opacity: 1; 
-  transition: opacity 0.3s ease; 
+  opacity: 1;
+  transition: opacity 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,13 +151,13 @@
 /* Định nghĩa keyframes cho hiệu ứng ẩn */
 @keyframes alert-hidden {
   from {
-    right: 15px; 
-    opacity: 1; 
+    right: 15px;
+    opacity: 1;
   }
   to {
     right: -100%;
-    opacity: 0; 
-    display: none; 
+    opacity: 0;
+    display: none;
   }
 }
 
@@ -524,5 +524,20 @@ body .box-cart .quantity-product {
 }
 
 .box-user.add [btn-cancel-friend] {
+  display: inline-block;
+}
+
+.box-user [btn-deleted-friend] {
+  display: none;
+}
+.box-user.refuse [btn-accept-friend] {
+  display: none;
+}
+
+.box-user.refuse [btn-refuse-friend] {
+  display: none;
+}
+
+.box-user.refuse [btn-deleted-friend] {
   display: inline-block;
 }
