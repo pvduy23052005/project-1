@@ -530,12 +530,21 @@ body .box-cart .quantity-product {
 .box-user [btn-deleted-friend] {
   display: none;
 }
+
+.box-user [btn-accepted-friend] {
+  display: none;
+}
+
 .box-user.refuse [btn-accept-friend] {
   display: none;
 }
 
 .box-user.refuse [btn-refuse-friend] {
   display: none;
+}
+
+.box-user.refuse [btn-accepted-friend] {
+  display: inline-block;
 }
 
 .box-user.refuse [btn-deleted-friend] {

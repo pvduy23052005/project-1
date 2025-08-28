@@ -70,7 +70,44 @@ module.exports = (res) => {
             $pull: { friendAccepts: userId },
           }
         );
+      } catch (error) {}
+    });
+
+    // accept friend .
+    socket.on("ACCEPT_FRIEND", async (userId) => {
+      try {
+        // add B friendLists of A
+        await User.updateOne(
+          {
+            _id: myId,
+          },
+          {
+            $addToSet: {
+              friendList: {
+                user_id: userId,
+                room_chat_id: "",
+              },
+            },
+            $pull: { friendAccepts: userId },
+          }
+        );
+        await User.updateOne(
+          {
+            _id: userId,
+          },
+          {
+            $addToSet: {
+              friendList: {
+                user_id: myId,
+                room_chat_id: "",
+              },
+            },
+            $pull: { friendRequests: myId },
+          }
+        );
+        console.log("successful");
       } catch (error) {
+        console.log(error);
       }
     });
   });

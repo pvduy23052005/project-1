@@ -31,8 +31,19 @@ if (listBtnRefuseFriend) {
     button.addEventListener("click", (e) => {
       const userId = button.getAttribute("btn-refuse-friend");
       button.closest(".box-user").classList.add("refuse");
-      console.log(userId);
       socket.emit("REFUSE_FRIEND", userId);
+    });
+  });
+}
+
+// accept friend .
+const btnAcceptFriend = document.querySelectorAll("[btn-accept-friend]");
+if (btnAcceptFriend) {
+  btnAcceptFriend.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const userId = button.getAttribute("btn-accept-friend");
+      button.closest(".box-user").classList.add("refuse");
+      socket.emit("ACCEPT_FRIEND", userId);
     });
   });
 }
