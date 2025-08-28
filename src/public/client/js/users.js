@@ -12,6 +12,18 @@ if (listBtnAddFriend) {
   });
 }
 
+// SERVER_RETURN_LENGTH_FRIENDACCEPTS
+const badge = document.querySelector("[badge-user-accept]");
+if (badge) {
+  socket.on("SERVER_RETURN_LENGTH_FRIENDACCEPTS", (data) => {
+    const countFriendAccept = data.countFriendAccept;
+    const id = badge.getAttribute("badge-user-accept");
+    if (data.userId == id) {
+      badge.textContent = countFriendAccept;
+    }
+  });
+}
+
 // cancel friend .
 const listBtnCancelFriend = document.querySelectorAll("[btn-cancel-friend]");
 if (listBtnCancelFriend) {
@@ -42,7 +54,7 @@ if (btnAcceptFriend) {
   btnAcceptFriend.forEach((button) => {
     button.addEventListener("click", (e) => {
       const userId = button.getAttribute("btn-accept-friend");
-      button.closest(".box-user").classList.add("refuse");
+      button.closest(".box-user").classList.add("accepted");
       socket.emit("ACCEPT_FRIEND", userId);
     });
   });

@@ -543,8 +543,12 @@ body .box-cart .quantity-product {
   display: none;
 }
 
-.box-user.refuse [btn-accepted-friend] {
+.box-user.accepted [btn-accepted-friend] {
   display: inline-block;
+}
+
+.box-user.accepted [btn-deleted-friend] {
+  display: none;
 }
 
 .box-user.refuse [btn-deleted-friend] {

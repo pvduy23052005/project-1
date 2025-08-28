@@ -25,6 +25,16 @@ module.exports = (res) => {
             $addToSet: { friendRequests: userId },
           }
         );
+        // hien thi real time loi moi ket ban .
+        const inforUser = await User.findOne({
+          _id: userId,
+        });
+        const countFriendAccept = inforUser.friendAccepts.length;
+
+        socket.broadcast.emit("SERVER_RETURN_LENGTH_FRIENDACCEPTS", {
+          userId: userId,
+          countFriendAccept,
+        });
       } catch (error) {}
     });
 
@@ -47,6 +57,15 @@ module.exports = (res) => {
             $pull: { friendAccepts: myId },
           }
         );
+        // Da huy thi giam loi moi ket ban di .
+        const inforUser = await User.findOne({
+          _id: userId,
+        });
+        const countFriendAccept = inforUser.friendAccepts.length;
+        socket.broadcast.emit("SERVER_RETURN_LENGTH_FRIENDACCEPTS", {
+          userId: userId,
+          countFriendAccept,
+        });
       } catch (error) {}
     });
 
