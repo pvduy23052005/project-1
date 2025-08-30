@@ -8,28 +8,28 @@ block main
     include ../../partials/list-btn-user.pug 
 
     .row(data-user-accept = user.id)
-        each user in users
-          .col-6
-            div(class = "box-user ")
-              .inner-avatar
-                img(src=(user.avatar ? user.avatar : "/client/image/user-avatar.png"), alt=user.fullName)
-              .inner-info
-                .inner-name #{user.fullName}
-                .inner-buttons
-                  button.btn.btn-sm.btn-primary.m-1(
-                    btn-accept-friend=user.id
-                  ) Chấp nhận
-                  button.btn.btn-sm.btn-primary.m-1(
-                    btn-accepted-friend=user.id
-                    disabled
-                  ) Da Chấp nhận
-                  button.btn.btn-sm.btn-secondary.m-1(
-                    btn-refuse-friend=user.id
-                  ) Hủy
-                  button.btn.btn-sm.btn-secondary.m-1(
-                    btn-deleted-friend=user.id 
-                    disabled
-                  ) Đã xóa
+      each user in users
+        .col-6(user-id = user.id)
+          div(class = "box-user ")
+            .inner-avatar
+              img(src=(user.avatar ? user.avatar : "/client/image/user-avatar.png"), alt=user.fullName)
+            .inner-info
+              .inner-name #{user.fullName}
+              .inner-buttons
+                button.btn.btn-sm.btn-primary.m-1(
+                  btn-accept-friend=user.id
+                ) Chấp nhận
+                button.btn.btn-sm.btn-primary.m-1(
+                  btn-accepted-friend=user.id
+                  disabled
+                ) Da Chấp nhận
+                button.btn.btn-sm.btn-secondary.m-1(
+                  btn-refuse-friend=user.id
+                ) Hủy
+                button.btn.btn-sm.btn-secondary.m-1(
+                  btn-deleted-friend=user.id 
+                  disabled 
+                ) Đã xóa
 
 
 block script 

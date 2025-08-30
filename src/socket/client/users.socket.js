@@ -75,6 +75,8 @@ module.exports = (res) => {
           userId: userId,
           countFriendAccept,
         });
+
+        socket.broadcast.emit("SERVER_RETURN_USERID_CANCEL", userId);
       } catch (error) {}
     });
 

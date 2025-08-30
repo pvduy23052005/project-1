@@ -26,12 +26,14 @@ if (badge) {
 
 // SERVER_RETURN_INFOUSER
 const listUserAccept = document.querySelector("[data-user-accept]");
-socket.on("SERVER_RETURN_INFOUSER", (data) => {
-  const userId = listUserAccept.getAttribute("data-user-accept");
-  if (data.userId == userId) {
-    const divInfo = document.createElement("div");
-    divInfo.classList.add("col-6");
-    divInfo.innerHTML = `
+if (listUserAccept) {
+  socket.on("SERVER_RETURN_INFOUSER", (data) => {
+    const myId = listUserAccept.getAttribute("data-user-accept");
+    if (data.userId == myId) {
+      const divInfo = document.createElement("div");
+      divInfo.classList.add("col-6");
+      divInfo.setAttribute("user-id", data.userId);
+      divInfo.innerHTML = `
       <div class="box-user">
         <div class="inner-avatar">
           <img src= ${
@@ -67,23 +69,24 @@ socket.on("SERVER_RETURN_INFOUSER", (data) => {
         </div>
       </div>
     `;
-    listUserAccept.appendChild(divInfo);
-    // accept friend .
-    const btnAccept = divInfo.querySelector("[btn-accept-friend]");
-    btnAccept.addEventListener("click", (e) => {
-      const userId = btnAccept.getAttribute("btn-accept-friend");
-      btnAccept.closest(".box-user").classList.add("accepted");
-      socket.emit("ACCEPT_FRIEND", userId);
-    });
-    // refuse firend .
-    const btnRefuse = divInfo.querySelector("[btn-refuse-friend]");
-    btnRefuse.addEventListener("click", (e) => {
-      const userId = btnRefuse.getAttribute("btn-refuse-friend");
-      btnRefuse.closest(".box-user").classList.add("refuse");
-      socket.emit("REFUSE_FRIEND", userId);
-    });
-  }
-});
+      listUserAccept.appendChild(divInfo);
+      // accept friend .
+      const btnAccept = divInfo.querySelector("[btn-accept-friend]");
+      btnAccept.addEventListener("click", (e) => {
+        const userId = btnAccept.getAttribute("btn-accept-friend");
+        btnAccept.closest(".box-user").classList.add("accepted");
+        socket.emit("ACCEPT_FRIEND", userId);
+      });
+      // refuse firend .
+      const btnRefuse = divInfo.querySelector("[btn-refuse-friend]");
+      btnRefuse.addEventListener("click", (e) => {
+        const userId = btnRefuse.getAttribute("btn-refuse-friend");
+        btnRefuse.closest(".box-user").classList.add("refuse");
+        socket.emit("REFUSE_FRIEND", userId);
+      });
+    }
+  });
+}
 
 // cancel friend
 const listBtnCancelFriend = document.querySelectorAll("[btn-cancel-friend]");
@@ -96,6 +99,17 @@ if (listBtnCancelFriend) {
     });
   });
 }
+
+// SERVER_RETURN_USERID
+socket.on("SERVER_RETURN_USERID_CANCEL", (idUserIsCanceled) => {
+  const userCancelFriend = document.querySelector(
+    `[user-id="${idUserIsCanceled}"]`
+  );
+  if (userCancelFriend) {
+    const listUserAccept = document.querySelector("[data-user-accept]");
+    listUserAccept.removeChild(userCancelFriend);
+  }
+});
 
 // refuse friend  :
 const listBtnRefuseFriend = document.querySelectorAll("[btn-refuse-friend]");
