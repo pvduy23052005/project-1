@@ -30,10 +30,19 @@ module.exports = (res) => {
           _id: userId,
         });
         const countFriendAccept = inforUser.friendAccepts.length;
-
         socket.broadcast.emit("SERVER_RETURN_LENGTH_FRIENDACCEPTS", {
           userId: userId,
           countFriendAccept,
+        });
+
+        // tra ve view real time .
+        const infoMyId = await User.findOne({
+          _id: myId,
+        }).select("avatar fullName ");
+
+        socket.broadcast.emit("SERVER_RETURN_INFOUSER", {
+          userId: userId,
+          infoMyId: infoMyId,
         });
       } catch (error) {}
     });

@@ -24,7 +24,68 @@ if (badge) {
   });
 }
 
-// cancel friend .
+// SERVER_RETURN_INFOUSER
+const listUserAccept = document.querySelector("[data-user-accept]");
+socket.on("SERVER_RETURN_INFOUSER", (data) => {
+  const userId = listUserAccept.getAttribute("data-user-accept");
+  if (data.userId == userId) {
+    const divInfo = document.createElement("div");
+    divInfo.classList.add("col-6");
+    divInfo.innerHTML = `
+      <div class="box-user">
+        <div class="inner-avatar">
+          <img src= ${
+            data.infoMyId.avatar
+              ? data.infoMyId.avatar
+              : "/client/image/user-avatar.png"
+          } alt="${data.fullName}">
+        </div>
+        <div class="inner-info">
+          <div class="inner-name">${data.infoMyId.fullName}</div>
+          <div class="inner-buttons">
+            <button class="btn btn-sm btn-primary m-1" btn-accept-friend=${
+              data.infoMyId._id
+            }>
+              Chấp nhận
+            </button>
+            <button class="btn btn-sm btn-primary m-1" btn-accepted-friend=${
+              data.infoMyId._id
+            } disabled>
+              Đã Chấp nhận
+            </button>
+            <button class="btn btn-sm btn-secondary m-1" btn-refuse-friend=${
+              data.infoMyId._id
+            }>
+              Hủy
+            </button>
+            <button class="btn btn-sm btn-secondary m-1" btn-deleted-friend=${
+              data.infoMyId._id
+            } disabled>
+              Đã xóa
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    listUserAccept.appendChild(divInfo);
+    // accept friend .
+    const btnAccept = divInfo.querySelector("[btn-accept-friend]");
+    btnAccept.addEventListener("click", (e) => {
+      const userId = btnAccept.getAttribute("btn-accept-friend");
+      btnAccept.closest(".box-user").classList.add("accepted");
+      socket.emit("ACCEPT_FRIEND", userId);
+    });
+    // refuse firend .
+    const btnRefuse = divInfo.querySelector("[btn-refuse-friend]");
+    btnRefuse.addEventListener("click", (e) => {
+      const userId = btnRefuse.getAttribute("btn-refuse-friend");
+      btnRefuse.closest(".box-user").classList.add("refuse");
+      socket.emit("REFUSE_FRIEND", userId);
+    });
+  }
+});
+
+// cancel friend
 const listBtnCancelFriend = document.querySelectorAll("[btn-cancel-friend]");
 if (listBtnCancelFriend) {
   listBtnCancelFriend.forEach((button) => {
