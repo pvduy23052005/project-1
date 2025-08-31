@@ -6,9 +6,9 @@ block main
   +box-head("List-users") 
   .container
     include ../../partials/list-btn-user.pug 
-    .row
+    .row(data-user-not-friend = user.id)
       each user in users
-        .col-6
+        .col-6(user-id = user.id) 
           div(class = "box-user")
             .inner-avatar
               img(src=(user.avatar ? user.avatar : "/client/image/user-avatar.png"), alt=user.fullName)

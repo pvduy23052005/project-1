@@ -25,9 +25,9 @@ if (badge) {
 }
 
 // SERVER_RETURN_INFOUSER
-const listUserAccept = document.querySelector("[data-user-accept]");
-if (listUserAccept) {
-  socket.on("SERVER_RETURN_INFOUSER", (data) => {
+socket.on("SERVER_RETURN_INFOUSER", (data) => {
+  const listUserAccept = document.querySelector("[data-user-accept]");
+  if (listUserAccept) {
     const myId = listUserAccept.getAttribute("data-user-accept");
     if (data.userId == myId) {
       const divInfo = document.createElement("div");
@@ -85,8 +85,20 @@ if (listUserAccept) {
         socket.emit("REFUSE_FRIEND", userId);
       });
     }
-  });
-}
+  }
+
+  const listUserNotFriend = document.querySelector("[data-user-not-friend]");
+  if (listUserNotFriend) {
+    const userId = listUserNotFriend.getAttribute("data-user-not-friend");
+    if (userId == data.userId) {
+      const userCancel = document.querySelector(
+        `[user-id= '${data.infoMyId._id}']`
+      );
+      console.log(userCancel);
+      listUserNotFriend.removeChild(userCancel);
+    }
+  }
+});
 
 // cancel friend
 const listBtnCancelFriend = document.querySelectorAll("[btn-cancel-friend]");
