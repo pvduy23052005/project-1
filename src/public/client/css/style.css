@@ -382,10 +382,6 @@ body .box-cart .quantity-product {
   height: auto;
   padding: 0;
   border-radius: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
 }
 
 .chat .inner-images-preview .image-preview .image-preview-item {
@@ -553,4 +549,14 @@ body .box-cart .quantity-product {
 
 .box-user.refuse [btn-deleted-friend] {
   display: inline-block;
+}
+
+.box-user .inner-status {
+  opacity: 0;
+  color: #00ff00;
+  font-size : 12px ;
+}
+
+.box-user .inner-status[status="online"] {
+  opacity: 1;
 }

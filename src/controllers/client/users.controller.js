@@ -60,7 +60,7 @@ module.exports.accept = async (req, res) => {
   });
   userSocket(res);
   const friendAccepts = user.friendAccepts;
-  
+
   const users = await User.find({
     $and: [{ _id: { $ne: userId } }, { _id: { $in: friendAccepts } }],
     status: "active",
@@ -71,4 +71,29 @@ module.exports.accept = async (req, res) => {
     title: "Accept",
     users: users,
   });
+};
+
+// [get] users/friend .
+module.exports.friend = async (req, res) => {
+  const myId = res.locals.user.id;
+
+  const user = await User.findOne({
+    _id: myId,
+  });
+
+  const friendList = user.friendList.map((item) => item.user_id);
+
+  const listFriend = await User.find({
+    $and: [{ _id: { $ne: myId } }, { _id: { $in: friendList } }],
+    status: "active",
+    deleted: false,
+  }).select("id fullName avatar statusOnline");
+
+  console.log(listFriend);
+
+  res.render("client/pages/users/friend", {
+    title: "friend",
+    listFriend: listFriend,
+  });
+  
 };

@@ -1,0 +1,33 @@
+extends ../../layout/default.pug
+include ../../mixins/box-head.pug
+
+block main 
+
+  +box-head("Request add friend")
+  .container 
+    include ../../partials/list-btn-user.pug 
+
+    .row 
+      .col-12 
+        each user in listFriend
+          .col-6
+            div(class = "box-user")
+              .inner-avatar
+                img(src=(user.avatar ? user.avatar : "/client/image/user-avatar.png"), alt=user.fullName)
+              .inner-info
+                .inner-name #{user.fullName}
+                .inner-buttons
+                  a(href="http://"
+                    class = "btn btn-sm btn-primary m-1"
+                  ) Chat            
+              .inner-status(
+                status=user.statusOnline
+                )
+                i.fa-solid.fa-circle
+
+
+block script 
+  script(src="/client/js/users.js") 
+
+
+
