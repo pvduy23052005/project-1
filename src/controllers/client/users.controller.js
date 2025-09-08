@@ -89,8 +89,6 @@ module.exports.friend = async (req, res) => {
     deleted: false,
   }).select("id fullName avatar statusOnline");
 
-  console.log(listFriend);
-
   res.render("client/pages/users/friend", {
     title: "friend",
     listFriend: listFriend,

@@ -146,3 +146,15 @@ if (btnAcceptFriend) {
     });
   });
 }
+
+// SERVER_RETURN_USER_ONLINE
+socket.on("SERVER_RETURN_USER_ONLINE", (data) => {
+  const boxDataUserFriend = document.querySelector(`[data-user-id-friend]`);
+  if (boxDataUserFriend) {
+    const boxUserId = document.querySelector(`[user-id="${data.userId}"]`);
+    if (boxUserId) {
+      const boxStatus = boxUserId.querySelector("[status]");
+      boxStatus.setAttribute("status", data.status);
+    }
+  }
+});
