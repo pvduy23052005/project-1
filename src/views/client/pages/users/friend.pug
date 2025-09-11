@@ -8,7 +8,7 @@ block main
     include ../../partials/list-btn-user.pug 
 
     .row(data-user-id-friend = user.id)
-      each user in listFriend
+      each user  in listFriend
         .col-6(user-id = user.id)
           div(class = "box-user")
             .inner-avatar
@@ -16,9 +16,9 @@ block main
             .inner-info
               .inner-name #{user.fullName}
               .inner-buttons
-                a(href="http://"
+                a(href=`/chat/${user.infoFriend.room_chat_id}`
                   class = "btn btn-sm btn-primary m-1"
-                ) Chat            
+                ) Chat
             .inner-status(
               status=user.statusOnline
               )

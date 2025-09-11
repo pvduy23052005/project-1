@@ -1,4 +1,5 @@
 const User = require("../../models/user.model");
+const Room = require("../../models/room.model");
 
 module.exports = (res) => {
   const myId = res.locals.user.id;
@@ -105,6 +106,24 @@ module.exports = (res) => {
 
     // accept friend .
     socket.on("ACCEPT_FRIEND", async (userId) => {
+      const dataChat = {
+        typeRoom: "single",
+        status: "active",
+        members: [
+          {
+            user_id: myId,
+            role: "admin",
+          },
+          {
+            user_id: userId,
+            role: "admin",
+          },
+        ],
+      };
+      const roomChat = new Room(dataChat);
+      await roomChat.save();
+      console.log(roomChat.id);
+
       try {
         // add B friendLists of A
         await User.updateOne(
@@ -115,12 +134,13 @@ module.exports = (res) => {
             $addToSet: {
               friendList: {
                 user_id: userId,
-                room_chat_id: "",
+                room_chat_id: roomChat.id,
               },
             },
             $pull: { friendAccepts: userId },
           }
         );
+        // add A friendList of B .
         await User.updateOne(
           {
             _id: userId,
@@ -129,16 +149,14 @@ module.exports = (res) => {
             $addToSet: {
               friendList: {
                 user_id: myId,
-                room_chat_id: "",
+                room_chat_id: roomChat.id,
               },
             },
             $pull: { friendRequests: myId },
           }
         );
         console.log("successful");
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     });
   });
 };

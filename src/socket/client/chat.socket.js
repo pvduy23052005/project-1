@@ -1,8 +1,9 @@
 const Chat = require("../../models/chat.model");
 const uploadCloud = require("../../helpers/client/uploadCloud");
 
-module.exports = (res) => {
+module.exports = (roomChatId, res) => {
   _io.once("connection", (socket) => {
+    socket.join(roomChatId);
     const userId = res.locals.user.id;
     const fullName = res.locals.user.fullName;
 
@@ -16,11 +17,12 @@ module.exports = (res) => {
         user_id: userId,
         content: message,
         images: imageUrls,
+        room_id: roomChatId,
       });
       await record.save();
 
       // server send message all user .
-      _io.emit("SERVER_SEND", {
+      _io.to(roomChatId).emit("SERVER_SEND", {
         user_id: userId,
         fullName: fullName,
         content: message,
@@ -30,7 +32,7 @@ module.exports = (res) => {
 
     // server listening .
     socket.on("CLIENT_TYPING", (type) => {
-      socket.broadcast.emit("SERVER_SEND_TYPING", {
+      socket.broadcast.to(roomChatId).emit("SERVER_SEND_TYPING", {
         user_id: userId,
         fullName: fullName,
         type: type,
