@@ -9,6 +9,7 @@ const userRoute = require("./user.route.js");
 const userMiddleware = require("../../middlewares/client/user.middleware.js");
 const chatRoute = require("./chat.route.js");
 const usersRoute = require("./users.route.js");
+const roomChatRoute = require("./room-chat.route.js");
 
 module.exports = (app) => {
   app.use(
@@ -32,4 +33,6 @@ module.exports = (app) => {
   app.use("/chat", chatRoute);
 
   app.use("/users", usersRoute);
+
+  app.use("/room-chat", roomChatRoute);
 };

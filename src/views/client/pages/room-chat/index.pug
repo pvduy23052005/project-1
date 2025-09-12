@@ -1,0 +1,28 @@
+extend ../../layout/default.pug
+include ../../mixins/box-head.pug
+
+block main 
+  .container
+    +box-head("Room Chat")
+    include ../../partials/list-btn-user.pug 
+
+    .row.mb-3
+      .col-12
+        a.btn.btn-sm.btn-success.mr-1(href="/room-chat/create") Tạo phòng chat
+
+    .row
+      each room in listRoom
+        .col-6
+          .box-room.d-flex.align-items-center.p-2.border.rounded.shadow-sm
+            //- Avatar
+            .inner-avatar.mr-5
+              img.img-fluid.rounded-circle(
+                src="https://robohash.org/hicveldicta.png",
+                alt= "avatar",
+                style="width:60px; height:60px; object-fit:cover;"
+            )
+            //- Thông tin
+            .inner-info.flex-grow-1
+              .inner-name.font-weight-bold #{room.title}
+              .inner-buttons.mt-2
+                a.btn.btn-sm.btn-primary.mr-1(href=`/chat/${room.id}`) Nhắn tin
