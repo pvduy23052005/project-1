@@ -14,7 +14,6 @@ if (btnStatus.length > 0) {
       }
 
       button.classList.add("active");
-
       window.location.href = url.href;
     });
   });

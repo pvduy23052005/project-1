@@ -136,6 +136,7 @@ module.exports.forgetPasswordPost = async (req, res) => {
   const user = await User.findOne({
     email: email,
   });
+  
   if (!user) {
     req.flash("error", "Email does not exist");
     res.redirect("/user/password/forget");
